@@ -108,22 +108,38 @@ export default function HomePage() {
               <span className="font-semibold">Scale • Secure • Revenue</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+            {/* <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
               AI-Powered Backend & <br />
               <span className="text-primary">System Engineering Services</span>
-            </h1>
+            </h1> */}
 
-            <p className="text-xl text-muted-foreground">
-              Aaibliss is a <strong>founder-led engineering studio</strong> helping
-              startups and businesses build scalable, secure, and
-              production-ready software systems.
-            </p>
+<h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+  Aaibliss – <br />
+  <span className="text-primary">
+    Systems Engineering for Scalable & AI-Driven Software
+  </span>
+</h1>
 
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              With <strong>5+ years of real-world experience</strong>, Aaibliss
-              specializes in backend systems, APIs, SaaS architecture,
-              microservices, and AI-powered automation.
-            </p>
+<p className="text-lg md:text-xl font-semibold text-primary mt-4">
+  Founder-led. Hands-on. Built for Growth.
+</p>
+           
+
+            <p className="text-xl text-muted-foreground mt-6 max-w-3xl mx-auto">
+  Aaibliss helps startups and businesses design, build, and scale
+  secure, production-ready software systems that handle real users,
+  real traffic, and real revenue.
+</p>
+
+
+           
+
+
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4">
+  With <strong>5+ years of real-world engineering experience</strong>,
+  Aaibliss specializes in backend systems, APIs, SaaS architecture,
+  microservices, and AI-powered automation.
+</p>
 
             <div className="flex justify-center gap-4 pt-4">
               <Button size="lg" className="gap-2">
@@ -147,7 +163,7 @@ export default function HomePage() {
 
           <p className="text-lg text-muted-foreground">
             Aaibliss is a <strong>founder-led backend & system engineering
-            studio</strong> focused on building software systems that scale
+            studio</strong> focused on performance & building software systems that scale
             smoothly, remain secure, and deliver long-term business value.
           </p>
 
@@ -234,6 +250,7 @@ export default function HomePage() {
                 <CardTitle><Code className="inline w-5 h-5 mr-2" />Frontend</CardTitle>
               </CardHeader>
               <CardContent className="flex gap-2 flex-wrap">
+                <TechBadge>React.js</TechBadge>
                 <TechBadge>Next.js</TechBadge>
                 <TechBadge>Tailwind CSS</TechBadge>
               </CardContent>
@@ -244,7 +261,7 @@ export default function HomePage() {
                 <CardTitle><Server className="inline w-5 h-5 mr-2" />Backend</CardTitle>
               </CardHeader>
               <CardContent className="flex gap-2 flex-wrap">
-                <TechBadge>Node.js</TechBadge>
+                <TechBadge>Node.js (Express, Fastify)</TechBadge>
                 <TechBadge>FastAPI</TechBadge>
                 <TechBadge>Laravel</TechBadge>
                 <TechBadge>Microservices</TechBadge>
@@ -261,6 +278,38 @@ export default function HomePage() {
                 <TechBadge>Vector DB</TechBadge>
               </CardContent>
             </Card>
+
+            <Card>
+                            <CardHeader>
+                              <CardTitle className="flex items-center gap-2">
+                                <Network className="w-5 h-5 text-primary" />
+                                Architecture
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              <div className="flex flex-wrap gap-2">
+                                <TechBadge>Microservices</TechBadge>
+                                <TechBadge>Event-driven(NATS,Kafka)</TechBadge>
+                              </div>
+                              <p className="text-sm text-muted-foreground">Modular Monolith & Microservice architectures</p>
+                            </CardContent>
+                          </Card>
+
+                          <Card>
+                                          <CardHeader>
+                                            <CardTitle className="flex items-center gap-2">
+                                              <Cpu className="w-5 h-5 text-primary" />
+                                              Performance & Scaling
+                                            </CardTitle>
+                                          </CardHeader>
+                                          <CardContent className="space-y-3">
+                                            <div className="flex flex-wrap gap-2">
+                                              <TechBadge>Redis caching</TechBadge>
+                                              <TechBadge>DB optimization</TechBadge>
+                                              <TechBadge>Horizontal scaling</TechBadge>
+                                            </div>
+                                          </CardContent>
+                                        </Card>
 
             <Card>
               <CardHeader>
@@ -349,7 +398,7 @@ export default function HomePage() {
           <Card>
             <CardContent className="pt-6 grid md:grid-cols-2 gap-4">
               {[
-                'Backend & API development',
+                'Backend & API/Integration development',
                 'SaaS architecture & system design',
                 'AI-powered automation systems',
                 'RAG chatbot development',
