@@ -10,28 +10,28 @@ import {
 
 const Styles = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:         #f7f6f2;
-      --bg2:        #f0ede6;
-      --bg3:        #eae6dd;
+      --bg:         #f5f3f0;
+      --bg2:        #ede8e3;
+      --bg3:        #e5dfd8;
       --surface:    #ffffff;
-      --border:     #e0dbd0;
-      --border2:    #d0c9bc;
-      --accent:     #1a56db;
-      --accent2:    #6941c6;
-      --accent-lt:  #eff4ff;
-      --green:      #027a48;
-      --green-lt:   #ecfdf3;
-      --text:       #111827;
-      --text2:      #374151;
-      --muted:      #6b7280;
-      --muted2:     #9ca3af;
-      --serif:      'Instrument Serif', Georgia, serif;
-      --sans:       'Plus Jakarta Sans', sans-serif;
+      --border:     #d9d3cb;
+      --border2:    #ccc5bb;
+      --accent:     #2c5f8d;
+      --accent2:    #d4a574;
+      --accent-lt:  #e8f1f7;
+      --green:      #3d7d63;
+      --green-lt:   #e6f3ed;
+      --text:       #1a1a1a;
+      --text2:      #3a3a3a;
+      --muted:      #7a7a7a;
+      --muted2:     #a8a8a8;
+      --serif:      'Playfair Display', Georgia, serif;
+      --sans:       'Poppins', sans-serif;
       --mono:       'JetBrains Mono', monospace;
     }
 
@@ -45,18 +45,19 @@ const Styles = () => (
 
     .dot-grid {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: radial-gradient(circle, #c5bfb3 1px, transparent 1px);
-      background-size: 28px 28px;
-      opacity: 0.45;
+      background-image: radial-gradient(circle, #c9beb5 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.35;
     }
 
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 64px;
-      background: rgba(247,246,242,0.88);
-      backdrop-filter: blur(16px) saturate(1.6);
-      border-bottom: 1px solid var(--border);
+      padding: 0 48px; height: 72px;
+      background: rgba(245,243,240,0.92);
+      backdrop-filter: blur(20px) saturate(1.8);
+      border-bottom: 1px solid var(--border2);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
     .nav-logo {
       font-family: var(--sans); font-size: 20px; font-weight: 700;
@@ -86,14 +87,14 @@ const Styles = () => (
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 24px; border-radius: 10px;
+      padding: 13px 28px; border-radius: 12px;
       background: var(--accent); color: #fff;
       font-family: var(--sans); font-weight: 600; font-size: 14px;
       border: none; cursor: pointer;
-      box-shadow: 0 1px 3px rgba(26,86,219,0.3), 0 4px 16px rgba(26,86,219,0.18);
-      transition: all 0.18s;
+      box-shadow: 0 4px 14px rgba(44,95,141,0.25), 0 8px 24px rgba(44,95,141,0.12);
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .btn-primary:hover { background: #1648c0; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(26,86,219,0.35); }
+    .btn-primary:hover { background: #1e4a6b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44,95,141,0.35), 0 12px 32px rgba(44,95,141,0.16); }
 
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
@@ -123,14 +124,14 @@ const Styles = () => (
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      border-radius: 18px;
+      transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.02);
     }
     .card:hover {
-      border-color: var(--border2);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
-      transform: translateY(-2px);
+      border-color: var(--accent2);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 6px 20px rgba(212,165,116,0.08);
+      transform: translateY(-4px);
     }
     .card-flat {
       background: var(--surface);
