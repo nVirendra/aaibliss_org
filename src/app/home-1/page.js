@@ -5,7 +5,8 @@ import {
   Code, Database, Server, Shield, Rocket, CheckCircle2,
   Users, Bot, Building2, Wrench, Package, Target, Mail,
   ArrowRight, Cpu, Network, ChevronRight, Sparkles,
-  Globe, Layers, Terminal, Zap, LineChart, BookOpen, Menu, X
+  Globe, Layers, Terminal, Zap, LineChart, BookOpen, Menu, X,
+  ExternalLink, Star, TrendingUp, Lock, LayoutDashboard, MessageSquare
 } from 'lucide-react'
 
 const Styles = () => (
@@ -205,7 +206,7 @@ const Nav = () => {
       <nav className="nav">
         <div className="nav-logo">AAI<span>BLISS</span></div>
         <ul className="nav-links nav-links-desktop">
-          {[['#services','Services'],['#stack','Stack'],['#approach','Approach']].map(([href, label]) => (
+          {[['#services','Services'],['#products','Products'],['#stack','Stack'],['#approach','Approach']].map(([href, label]) => (
             <li key={label}><a href={href} className="nav-link">{label}</a></li>
           ))}
           <li>
@@ -223,7 +224,7 @@ const Nav = () => {
       </nav>
       {open && (
         <div style={{position:'fixed',top:64,left:0,right:0,zIndex:99,background:'var(--bg)',borderBottom:'1px solid var(--border)',padding:'12px 20px',display:'flex',flexDirection:'column',gap:4}}>
-          {[['#services','Services'],['#stack','Stack'],['#approach','Approach'],['#blog','Blog']].map(([href, label]) => (
+          {[['#services','Services'],['#products','Products'],['#stack','Stack'],['#approach','Approach'],['#blog','Blog']].map(([href, label]) => (
             <a key={label} href={href} className="nav-link" onClick={() => setOpen(false)} style={{display:'block'}}>{label}</a>
           ))}
           <button className="btn-primary" style={{marginTop:8,justifyContent:'center'}}><Mail size={13} /> Get in Touch</button>
@@ -457,6 +458,132 @@ const ServicesSection = () => (
   </section>
 )
 
+/* ── Products ── */
+const products = [
+  {
+    tag: 'SaaS Platform',
+    title: 'Multi-Tenant CRM & Sales Pipeline',
+    desc: 'A full-featured CRM built for B2B SaaS teams — with role-based workspaces, deal pipelines, activity timelines, and real-time analytics. Handles 10k+ daily active users across isolated tenants.',
+    stack: ['Node.js', 'PostgreSQL', 'Redis', 'React'],
+    metrics: [['10k+', 'Daily Active Users'], ['<80ms', 'API p95 Latency'], ['99.9%', 'Uptime']],
+    icon: LayoutDashboard,
+    tint: 'var(--accent-lt)',
+    iconColor: 'var(--navy)',
+    status: 'Live',
+  },
+  {
+    tag: 'AI System',
+    title: 'RAG-Powered Support Chatbot',
+    desc: 'An intelligent support assistant trained on product documentation using retrieval-augmented generation. Integrated into a SaaS helpdesk, reducing support tickets by 60% in the first month.',
+    stack: ['FastAPI', 'pgvector', 'OpenAI', 'Next.js'],
+    metrics: [['60%', 'Ticket Reduction'], ['1.2s', 'Avg Response Time'], ['95%', 'Accuracy Rate']],
+    icon: MessageSquare,
+    tint: 'var(--teal-lt)',
+    iconColor: 'var(--teal-dark)',
+    status: 'Live',
+  },
+  {
+    tag: 'Backend Infra',
+    title: 'Event-Driven Order Processing System',
+    desc: 'Microservices architecture for a high-volume e-commerce platform — order ingestion, inventory sync, payment orchestration, and fulfillment via NATS messaging. Processes 5k+ orders/day reliably.',
+    stack: ['NATS', 'Fastify', 'MongoDB', 'Docker'],
+    metrics: [['5k+', 'Orders Per Day'], ['3×', 'Throughput Gain'], ['Zero', 'Data Loss Events']],
+    icon: TrendingUp,
+    tint: '#eef1fc',
+    iconColor: 'var(--navy-mid)',
+    status: 'Live',
+  },
+  {
+    tag: 'Security Layer',
+    title: 'RBAC & Auth Infrastructure',
+    desc: 'A reusable, production-grade authentication and authorization layer built for enterprise SaaS. Supports OAuth2, JWT rotation, fine-grained RBAC, and full audit logging with OWASP compliance.',
+    stack: ['OAuth2', 'JWT', 'PostgreSQL', 'Redis'],
+    metrics: [['5+', 'Apps Integrated'], ['OWASP', 'Compliant'], ['<5ms', 'Auth Check Speed']],
+    icon: Lock,
+    tint: '#f0fff4',
+    iconColor: '#1a7a4a',
+    status: 'Template',
+  },
+]
+
+const ProductCard = ({ product, flip }) => {
+  const { tag, title, desc, stack, metrics, icon: Icon, tint, iconColor, status } = product
+  return (
+    <div className="card" style={{ overflow: 'hidden' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+
+        {/* ── Metrics panel ── */}
+        {flip && (
+          <div style={{ flex: '0 0 320px', minWidth: 240, background: tint, borderRight: '1px solid var(--border)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '40px 32px', gap: 8 }}>
+            <div style={{ width: 60, height: 60, borderRadius: 14, background: 'rgba(255,255,255,0.8)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, boxShadow: '0 4px 14px rgba(0,0,0,0.06)' }}>
+              <Icon size={26} style={{ color: iconColor }} />
+            </div>
+            {metrics.map(([val, label]) => (
+              <div key={label} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '13px 16px', background: 'rgba(255,255,255,0.65)', borderRadius: 10, border: '1px solid rgba(255,255,255,0.95)', marginBottom: 4 }}>
+                <span style={{ fontFamily: 'var(--serif)', fontSize: 26, color: 'var(--navy)', lineHeight: 1 }}>{val}</span>
+                <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--muted)', textAlign: 'right', maxWidth: 100, lineHeight: 1.4 }}>{label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* ── Content ── */}
+        <div style={{ flex: 1, minWidth: 280, padding: '40px 44px', display: 'flex', flexDirection: 'column', gap: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span className="badge badge-neutral" style={{ fontSize: 10 }}>{tag}</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 999, background: status === 'Live' ? 'var(--teal-lt)' : 'var(--bg2)', border: `1px solid ${status === 'Live' ? 'rgba(59,191,191,0.3)' : 'var(--border2)'}`, fontFamily: 'var(--mono)', fontSize: 10, color: status === 'Live' ? 'var(--teal-dark)' : 'var(--muted)' }}>
+              {status === 'Live' && <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--teal)' }} />}
+              {status}
+            </span>
+          </div>
+          <h3 style={{ fontFamily: 'var(--serif)', fontSize: 25, fontWeight: 400, color: 'var(--text)', lineHeight: 1.25 }}>{title}</h3>
+          <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.75 }}>{desc}</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {stack.map(s => <span key={s} className="chip">{s}</span>)}
+          </div>
+          <button className="btn-ghost" style={{ alignSelf: 'flex-start', padding: '9px 18px', fontSize: 13 }}>
+            View Case Study <ExternalLink size={13} />
+          </button>
+        </div>
+
+        {/* ── Metrics panel (right side) ── */}
+        {!flip && (
+          <div style={{ flex: '0 0 320px', minWidth: 240, background: tint, borderLeft: '1px solid var(--border)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '40px 32px', gap: 8 }}>
+            <div style={{ width: 60, height: 60, borderRadius: 14, background: 'rgba(255,255,255,0.8)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, boxShadow: '0 4px 14px rgba(0,0,0,0.06)' }}>
+              <Icon size={26} style={{ color: iconColor }} />
+            </div>
+            {metrics.map(([val, label]) => (
+              <div key={label} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '13px 16px', background: 'rgba(255,255,255,0.65)', borderRadius: 10, border: '1px solid rgba(255,255,255,0.95)', marginBottom: 4 }}>
+                <span style={{ fontFamily: 'var(--serif)', fontSize: 26, color: 'var(--navy)', lineHeight: 1 }}>{val}</span>
+                <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--muted)', textAlign: 'right', maxWidth: 100, lineHeight: 1.4 }}>{label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+const ProductsSection = () => (
+  <section id="products" className="section section-alt">
+    <div className="inner">
+      <div className="eyebrow"><div className="eyebrow-line" /><span className="badge badge-neutral"><Star size={11} /> Systems Shipped</span></div>
+      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 56, flexWrap: 'wrap', gap: 16 }}>
+        <h2 className="serif" style={{ fontSize: 'clamp(30px, 4vw, 52px)', maxWidth: 560 }}>
+          50+ systems shipped —<br /><span className="hl-italic">here are a few that stand out.</span>
+        </h2>
+        <span className="badge badge-green"><CheckCircle2 size={11} /> Production-grade · Real clients · Real scale</span>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {products.map((p, i) => (
+          <ProductCard key={p.title} product={p} flip={i % 2 !== 0} />
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
 /* ── Blog ── */
 const BlogSection = () => (
   <section id="blog" className="section section-alt">
@@ -566,6 +693,7 @@ export default function HomePage() {
       <Approach />
       <WhyUs />
       <ServicesSection />
+      <ProductsSection />
       <BlogSection />
       <Vision />
       <CTA />
