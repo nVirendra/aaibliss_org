@@ -197,28 +197,28 @@ const Nav = ({ onProjectClick }) => {
       <nav className="nav">
         <div className="nav-logo">aai<span>bliss</span></div>
         <ul className="nav-links nav-links-desktop">
-          {[['#services','Services'],['#stack','Stack'],['#approach','Approach']].map(([href, label]) => (
+          {[['#services', 'Services'], ['#stack', 'Stack'], ['#approach', 'Approach']].map(([href, label]) => (
             <li key={label}><a href={href} className="nav-link">{label}</a></li>
           ))}
           <li>
             <a href="#blog" className="nav-link nav-link-blog">
-              <BookOpen size={13} style={{display:'inline',marginRight:5,verticalAlign:'middle'}} />Blog
+              <BookOpen size={13} style={{ display: 'inline', marginRight: 5, verticalAlign: 'middle' }} />Blog
             </a>
           </li>
         </ul>
-        <div style={{display:'flex',gap:10,alignItems:'center'}}>
-          <button className="btn-primary hide-sm" onClick={onProjectClick} style={{padding:'9px 18px',fontSize:13}}><Mail size={13} /> Start a Project</button>
-          <button onClick={() => setOpen(o => !o)} style={{background:'none',border:'none',cursor:'pointer',padding:6,display:'none'}} id="hamburger">
-            {open ? <X size={20}/> : <Menu size={20}/>}
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <button className="btn-primary hide-sm" onClick={onProjectClick} style={{ padding: '9px 18px', fontSize: 13 }}><Mail size={13} /> Start a Project</button>
+          <button onClick={() => setOpen(o => !o)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 6, display: 'none' }} id="hamburger">
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </nav>
       {open && (
-        <div style={{position:'fixed',top:64,left:0,right:0,zIndex:99,background:'var(--bg)',borderBottom:'1px solid var(--border)',padding:'12px 20px',display:'flex',flexDirection:'column',gap:4}}>
-          {[['#services','Services'],['#stack','Stack'],['#approach','Approach'],['#blog','Blog']].map(([href, label]) => (
-            <a key={label} href={href} className="nav-link" onClick={() => setOpen(false)} style={{display:'block'}}>{label}</a>
+        <div style={{ position: 'fixed', top: 64, left: 0, right: 0, zIndex: 99, background: 'var(--bg)', borderBottom: '1px solid var(--border)', padding: '12px 20px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {[['#services', 'Services'], ['#stack', 'Stack'], ['#approach', 'Approach'], ['#blog', 'Blog']].map(([href, label]) => (
+            <a key={label} href={href} className="nav-link" onClick={() => setOpen(false)} style={{ display: 'block' }}>{label}</a>
           ))}
-          <button className="btn-primary" onClick={() => { setOpen(false); onProjectClick(); }} style={{marginTop:8,justifyContent:'center'}}><Mail size={13} /> Start a Project</button>
+          <button className="btn-primary" onClick={() => { setOpen(false); onProjectClick(); }} style={{ marginTop: 8, justifyContent: 'center' }}><Mail size={13} /> Start a Project</button>
         </div>
       )}
       <style>{`@media(max-width:780px){#hamburger{display:block!important}}`}</style>
@@ -255,7 +255,7 @@ const Hero = ({ onProjectClick }) => (
       </div>
 
       <div className="fu d4 stats-row" style={{ display: 'flex', gap: 0, flexWrap: 'wrap' }}>
-        {[['5+','Years Experience'],['5+','Systems Shipped'],['3×','Avg Perf. Gains'],['100%','Founder-Led']].map(([n, l], i) => (
+        {[['5+', 'Years Experience'], ['5+', 'Systems Shipped'], ['3×', 'Avg Perf. Gains'], ['100%', 'Founder-Led']].map(([n, l], i) => (
           <div key={l} style={{ paddingRight: 40, marginRight: 40, borderRight: i < 3 ? '1px solid var(--border2)' : 'none', marginBottom: 8 }}>
             <div style={{ fontFamily: 'var(--serif)', fontSize: 38, color: 'var(--text)', lineHeight: 1 }}>{n}</div>
             <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 5, fontFamily: 'var(--mono)' }}>{l}</div>
@@ -280,10 +280,15 @@ const About = () => (
           <p style={{ color: 'var(--muted)', lineHeight: 1.8, fontSize: 16, marginBottom: 28 }}>
             Aaibliss is a founder-led backend & systems engineering studio focused on performance — building software that scales smoothly, stays secure, and delivers long-term business value. With 5+ years of real-world production experience.
           </p>
-          <span className="badge badge-green"><CheckCircle2 size={11} /> Available for new projects</span>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <span className="badge badge-green"><CheckCircle2 size={11} /> Available for new projects</span>
+            <span className="badge badge-neutral" style={{ background: 'var(--surface)' }}>
+              <Globe size={11} style={{ color: 'var(--muted)' }} /> Based in India · Working seamlessly across US & Indian timezones
+            </span>
+          </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          {[[Layers,'System Design'],[Server,'Backend & APIs'],[Shield,'Security'],[Cpu,'Performance'],[Bot,'AI Automation'],[Network,'Microservices']].map(([Icon, label]) => (
+          {[[Layers, 'System Design'], [Server, 'Backend & APIs'], [Shield, 'Security'], [Cpu, 'Performance'], [Bot, 'AI Automation'], [Network, 'Microservices']].map(([Icon, label]) => (
             <div key={label} className="card-flat" style={{ padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ width: 34, height: 34, borderRadius: 8, background: 'var(--accent-lt)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <Icon size={15} style={{ color: 'var(--accent)' }} />
@@ -323,9 +328,9 @@ const WhatWeBuild = () => (
         End-to-end engineering,<br />from <span className="hl-italic">architecture</span> to production.
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }} className="three-col">
-        <BuildCard icon={Server}    title="Scalable SaaS Products"         tint="var(--accent-lt)" items={['Multi-tenant SaaS platforms','Role-based access & permissions','Subscription & billing systems','Admin dashboards & analytics','High-traffic production systems']} />
-        <BuildCard icon={Bot}       title="AI-Powered Business Systems"     tint="#f5f3ff"          items={['RAG chatbots & assistants','AI moderation & reporting','AI analytics & insights','Workflow automation pipelines']} />
-        <BuildCard icon={Building2} title="Startup & Enterprise Solutions"  tint="var(--green-lt)"  items={['Internal tools & portals','Legacy system modernization','Backend refactoring','API-first architecture']} />
+        <BuildCard icon={Server} title="Scalable SaaS Products" tint="var(--accent-lt)" items={['Multi-tenant SaaS platforms', 'Role-based access & permissions', 'Subscription & billing systems', 'Admin dashboards & analytics', 'High-traffic production systems']} />
+        <BuildCard icon={Bot} title="AI-Powered Business Systems" tint="#f5f3ff" items={['RAG chatbots & assistants', 'AI moderation & reporting', 'AI analytics & insights', 'Workflow automation pipelines']} />
+        <BuildCard icon={Building2} title="Startup & Enterprise Solutions" tint="var(--green-lt)" items={['Internal tools & portals', 'Legacy system modernization', 'Backend refactoring', 'API-first architecture']} />
       </div>
     </div>
   </section>
@@ -352,12 +357,12 @@ const TechStack = () => (
         Full-stack expertise,<br /><span className="hl-italic">battle-tested</span> in production.
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-        <StackCard icon={Code}     title="Frontend"              chips={['React.js','Next.js','Tailwind CSS']} />
-        <StackCard icon={Server}   title="Backend"               chips={['Node.js','Express','Fastify','FastAPI','Laravel']} />
-        <StackCard icon={Database} title="Databases"             chips={['PostgreSQL','MongoDB','Redis','Vector DB']} />
-        <StackCard icon={Network}  title="Architecture"          chips={['Microservices','Modular Monolith','Event-Driven','NATS','Kafka']} />
-        <StackCard icon={Cpu}      title="Performance & Scaling" chips={['Redis Caching','DB Optimization','Horizontal Scaling','CDN']} />
-        <StackCard icon={Shield}   title="Security"              chips={['JWT / OAuth2','RBAC','Rate Limiting','Encryption','OWASP']} />
+        <StackCard icon={Code} title="Frontend" chips={['React.js', 'Next.js', 'Tailwind CSS']} />
+        <StackCard icon={Server} title="Backend" chips={['Node.js', 'Express', 'Fastify', 'FastAPI', 'Laravel']} />
+        <StackCard icon={Database} title="Databases" chips={['PostgreSQL', 'MongoDB', 'Redis', 'Vector DB']} />
+        <StackCard icon={Network} title="Architecture" chips={['Microservices', 'Modular Monolith', 'Event-Driven', 'NATS', 'Kafka']} />
+        <StackCard icon={Cpu} title="Performance & Scaling" chips={['Redis Caching', 'DB Optimization', 'Horizontal Scaling', 'CDN']} />
+        <StackCard icon={Shield} title="Security" chips={['JWT / OAuth2', 'RBAC', 'Rate Limiting', 'Encryption', 'OWASP']} />
       </div>
     </div>
   </section>
@@ -373,9 +378,9 @@ const Approach = () => (
       </h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         {[
-          ['01','Think First','Understand business goals, growth plans, and bottlenecks before writing a single line of code. Architecture decisions made upfront save months of refactoring later.'],
-          ['02','Build for Production','Secure, scalable, and maintainable systems from day one. No shortcuts — every design decision is made with long-term health in mind.'],
-          ['03','Optimize for Growth','Performance tuning, cost reduction, and AI automation. Systems that grow with your business rather than becoming bottlenecks.'],
+          ['01', 'Think First', 'Understand business goals, growth plans, and bottlenecks before writing a single line of code. Architecture decisions made upfront save months of refactoring later.'],
+          ['02', 'Build for Production', 'Secure, scalable, and maintainable systems from day one. No shortcuts — every design decision is made with long-term health in mind.'],
+          ['03', 'Optimize for Growth', 'Performance tuning, cost reduction, and AI automation. Systems that grow with your business rather than becoming bottlenecks.'],
         ].map(([n, title, desc], i) => (
           <div key={n} className="card" style={{ padding: '26px 30px', display: 'flex', alignItems: 'flex-start', gap: 22, borderRadius: i === 0 ? '14px 14px 4px 4px' : i === 2 ? '4px 4px 14px 14px' : '4px' }}>
             <div className="step-num">{n}</div>
@@ -407,12 +412,12 @@ const WhyUs = () => (
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {[
-            ['Founder-led, hands-on engineering','var(--accent)'],
-            ['5+ years production experience','var(--accent2)'],
-            ['Startup & enterprise mindset','var(--green)'],
-            ['Strong system design skills','var(--accent)'],
-            ['AI-first problem solving','var(--accent2)'],
-            ['Clear ownership & communication','var(--green)'],
+            ['Founder-led, hands-on engineering', 'var(--accent)'],
+            ['5+ years production experience', 'var(--accent2)'],
+            ['Startup & enterprise mindset', 'var(--green)'],
+            ['Strong system design skills', 'var(--accent)'],
+            ['AI-first problem solving', 'var(--accent2)'],
+            ['Clear ownership & communication', 'var(--green)'],
           ].map(([label, dot]) => (
             <div key={label} className="card-flat" style={{ padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 14 }}>
               <div style={{ width: 8, height: 8, borderRadius: '50%', background: dot, flexShrink: 0 }} />
@@ -434,10 +439,10 @@ const ServicesSection = () => (
         Everything you need to <span className="hl-italic">ship and scale.</span>
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 12 }}>
-        {[[Code,'Backend & API Development'],[Layers,'SaaS Architecture & System Design'],[Bot,'AI-Powered Automation Systems'],[Globe,'RAG Chatbot Development'],[Network,'Microservices & Event-Driven Systems'],[Cpu,'Performance Optimization'],[Shield,'Security Hardening'],[Wrench,'Legacy System Migration']].map(([Icon, label]) => (
+        {[[Code, 'Backend & API Development'], [Layers, 'SaaS Architecture & System Design'], [Bot, 'AI-Powered Automation Systems'], [Globe, 'RAG Chatbot Development'], [Network, 'Microservices & Event-Driven Systems'], [Cpu, 'Performance Optimization'], [Shield, 'Security Hardening'], [Wrench, 'Legacy System Migration']].map(([Icon, label]) => (
           <div key={label} className="card-flat" style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', gap: 13, cursor: 'pointer', transition: 'all 0.18s' }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor='rgba(26,86,219,0.3)'; e.currentTarget.style.background='var(--accent-lt)'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor='var(--border)'; e.currentTarget.style.background='var(--surface)'; }}>
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(26,86,219,0.3)'; e.currentTarget.style.background = 'var(--accent-lt)'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.background = 'var(--surface)'; }}>
             <div style={{ width: 34, height: 34, borderRadius: 8, background: 'var(--accent-lt)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Icon size={15} style={{ color: 'var(--accent)' }} />
             </div>
@@ -535,9 +540,9 @@ const Vision = () => (
       <p style={{ color: 'var(--muted)', fontSize: 17, marginBottom: 52, maxWidth: 400, margin: '0 auto 52px' }}>Three pillars. Every system we build serves all three.</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="three-col">
         {[
-          { icon: Rocket,    label: 'Scale',   desc: 'Without rewriting systems',     color: 'var(--accent)'  },
-          { icon: Shield,    label: 'Secure',  desc: 'Data & users from day one',     color: 'var(--accent2)' },
-          { icon: LineChart, label: 'Revenue', desc: 'Reduce cost with AI automation',color: 'var(--green)'   },
+          { icon: Rocket, label: 'Scale', desc: 'Without rewriting systems', color: 'var(--accent)' },
+          { icon: Shield, label: 'Secure', desc: 'Data & users from day one', color: 'var(--accent2)' },
+          { icon: LineChart, label: 'Revenue', desc: 'Reduce cost with AI automation', color: 'var(--green)' },
         ].map(({ icon: Icon, label, desc, color }) => (
           <div key={label} className="card" style={{ padding: 32, textAlign: 'center' }}>
             <div style={{ width: 48, height: 48, borderRadius: 12, background: 'var(--bg2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
@@ -585,20 +590,20 @@ const SocialIcon = ({ icon: Icon, href }) => (
     background: 'var(--surface)', color: 'var(--text2)', border: '1px solid var(--border)',
     transition: 'all 0.2s cubic-bezier(0.22, 1, 0.36, 1)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
   }}
-  onMouseEnter={e => {
-    e.currentTarget.style.background = 'var(--accent)';
-    e.currentTarget.style.color = '#fff';
-    e.currentTarget.style.borderColor = 'var(--accent)';
-    e.currentTarget.style.transform = 'translateY(-3px)';
-    e.currentTarget.style.boxShadow = '0 6px 16px rgba(44,95,141,0.25)';
-  }}
-  onMouseLeave={e => {
-    e.currentTarget.style.background = 'var(--surface)';
-    e.currentTarget.style.color = 'var(--text2)';
-    e.currentTarget.style.borderColor = 'var(--border)';
-    e.currentTarget.style.transform = 'translateY(0)';
-    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
-  }}>
+    onMouseEnter={e => {
+      e.currentTarget.style.background = 'var(--accent)';
+      e.currentTarget.style.color = '#fff';
+      e.currentTarget.style.borderColor = 'var(--accent)';
+      e.currentTarget.style.transform = 'translateY(-3px)';
+      e.currentTarget.style.boxShadow = '0 6px 16px rgba(44,95,141,0.25)';
+    }}
+    onMouseLeave={e => {
+      e.currentTarget.style.background = 'var(--surface)';
+      e.currentTarget.style.color = 'var(--text2)';
+      e.currentTarget.style.borderColor = 'var(--border)';
+      e.currentTarget.style.transform = 'translateY(0)';
+      e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
+    }}>
     <Icon size={18} />
   </a>
 )
@@ -615,9 +620,12 @@ const Footer = () => (
           <a href="tel:+1234567890" style={{ fontSize: 14, color: 'var(--text2)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text2)'}>
             <Phone size={16} style={{ color: 'var(--muted)' }} /> +1 (234) 567-890
           </a>
+          <div style={{ fontSize: 14, color: 'var(--text2)', display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
+            <Globe size={16} style={{ color: 'var(--muted)' }} /> Based in India · Working seamlessly across US & Indian timezones
+          </div>
         </div>
       </div>
-      
+
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 20 }}>
         <div style={{ display: 'flex', gap: 12 }}>
           <SocialIcon icon={Github} href="#" />
@@ -625,7 +633,7 @@ const Footer = () => (
           <SocialIcon icon={Youtube} href="#" />
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {['Scale','Secure','Revenue'].map(t => <span key={t} className="badge badge-neutral" style={{ background: 'var(--surface)' }}>{t}</span>)}
+          {['Scale', 'Secure', 'Revenue'].map(t => <span key={t} className="badge badge-neutral" style={{ background: 'var(--surface)' }}>{t}</span>)}
         </div>
       </div>
     </div>
@@ -671,7 +679,7 @@ const ProjectModal = ({ onClose }) => {
         }}>
           <X size={18} />
         </button>
-        
+
         <div style={{ padding: '32px 32px 24px', borderBottom: '1px solid var(--border)', position: 'sticky', top: 0, background: 'var(--surface)', zIndex: 1, borderTopLeftRadius: 18, borderTopRightRadius: 18 }}>
           <h3 style={{ fontFamily: 'var(--serif)', fontSize: 26, color: 'var(--text)', marginBottom: 8 }}>
             Start a <span className="hl-italic">Project</span>
@@ -690,7 +698,7 @@ const ProjectModal = ({ onClose }) => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ padding: 32, display: 'flex', flexDirection: 'column', gap: 32 }}>
-            
+
             {/* Basic Info */}
             <div>
               <div style={sectionTitleStyle}>Basic Info</div>
@@ -822,7 +830,7 @@ const WhatsAppFAB = () => (
     }}
   >
     <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
     </svg>
   </a>
 )
