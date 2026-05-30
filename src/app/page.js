@@ -4,7 +4,7 @@ import { useState } from 'react'
 import {
   Code, Database, Server, Shield, Rocket, CheckCircle2,
   Users, Bot, Building2, Wrench, Package, Target, Mail,
-  ArrowRight, Cpu, Network, ChevronRight, Sparkles,
+  ArrowRight, ArrowUpRight, Cpu, Network, ChevronRight, Sparkles,
   Globe, Layers, Terminal, Zap, LineChart, BookOpen, Menu, X, Star, Quote,
   Youtube, Linkedin, Github, Calendar, Phone
 } from 'lucide-react'
@@ -176,6 +176,232 @@ const Styles = () => (
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .portfolio-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .portfolio-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(44,95,141,0.12), 0 8px 24px rgba(44,95,141,0.04);
+    }
+    .portfolio-img-container {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .portfolio-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .portfolio-card:hover .portfolio-img {
+      transform: scale(1.06);
+    }
+    .portfolio-content {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .portfolio-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      align-self: flex-start;
+    }
+    .portfolio-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      color: var(--text);
+      font-weight: 500;
+      margin: 14px 0 10px 0;
+      line-height: 1.25;
+    }
+    .portfolio-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+    .portfolio-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--border2);
+    }
+    .portfolio-metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .portfolio-metric-val {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--accent);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .portfolio-metric-lbl {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .portfolio-tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .portfolio-tech-chip {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text2);
+      background: var(--bg3);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .portfolio-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .portfolio-link-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-lt);
+    }
+
+    .pricing-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      position: relative;
+    }
+    .pricing-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(44,95,141,0.12), 0 8px 24px rgba(44,95,141,0.04);
+    }
+    .pricing-card-popular {
+      border-color: var(--accent2);
+      background: var(--surface);
+      box-shadow: 0 10px 30px rgba(212,165,116,0.06);
+    }
+    .pricing-card-popular:hover {
+      border-color: var(--accent);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      right: 28px;
+      background: var(--accent2);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(212,165,116,0.25);
+    }
+    .pricing-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .pricing-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      min-height: 48px;
+    }
+    .pricing-cost {
+      font-family: var(--serif);
+      font-size: 36px;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .pricing-period {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+    .pricing-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.45;
+    }
+    .pricing-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
     @media (max-width: 780px) {
       .nav { padding: 0 20px; }
       .nav-links-desktop { display: none; }
@@ -197,7 +423,7 @@ const Nav = ({ onProjectClick }) => {
       <nav className="nav">
         <div className="nav-logo">aai<span>bliss</span></div>
         <ul className="nav-links nav-links-desktop">
-          {[['#services', 'Services'], ['#stack', 'Stack'], ['#approach', 'Approach']].map(([href, label]) => (
+          {[['#services', 'Services'], ['#portfolio', 'Portfolio'], ['#pricing', 'Pricing'], ['#approach', 'Approach']].map(([href, label]) => (
             <li key={label}><a href={href} className="nav-link">{label}</a></li>
           ))}
           <li>
@@ -215,7 +441,7 @@ const Nav = ({ onProjectClick }) => {
       </nav>
       {open && (
         <div style={{ position: 'fixed', top: 64, left: 0, right: 0, zIndex: 99, background: 'var(--bg)', borderBottom: '1px solid var(--border)', padding: '12px 20px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {[['#services', 'Services'], ['#stack', 'Stack'], ['#approach', 'Approach'], ['#blog', 'Blog']].map(([href, label]) => (
+          {[['#services', 'Services'], ['#portfolio', 'Portfolio'], ['#pricing', 'Pricing'], ['#approach', 'Approach'], ['#blog', 'Blog']].map(([href, label]) => (
             <a key={label} href={href} className="nav-link" onClick={() => setOpen(false)} style={{ display: 'block' }}>{label}</a>
           ))}
           <button className="btn-primary" onClick={() => { setOpen(false); onProjectClick(); }} style={{ marginTop: 8, justifyContent: 'center' }}><Mail size={13} /> Start a Project</button>
@@ -255,7 +481,7 @@ const Hero = ({ onProjectClick }) => (
       </div>
 
       <div className="fu d4 stats-row" style={{ display: 'flex', gap: 0, flexWrap: 'wrap' }}>
-        {[['5+', 'Years Experience'], ['5+', 'Systems Shipped'], ['3×', 'Avg Perf. Gains'], ['100%', 'Founder-Led']].map(([n, l], i) => (
+        {[['5+', 'Years Experience'], ['15+', 'Systems Shipped'], ['3×', 'Avg Perf. Gains'], ['100%', 'Founder-Led']].map(([n, l], i) => (
           <div key={l} style={{ paddingRight: 40, marginRight: 40, borderRight: i < 3 ? '1px solid var(--border2)' : 'none', marginBottom: 8 }}>
             <div style={{ fontFamily: 'var(--serif)', fontSize: 38, color: 'var(--text)', lineHeight: 1 }}>{n}</div>
             <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 5, fontFamily: 'var(--mono)' }}>{l}</div>
@@ -270,32 +496,60 @@ const Hero = ({ onProjectClick }) => (
 const About = () => (
   <section className="section section-alt">
     <div className="inner">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }} className="two-col">
-        <div>
-          <div className="eyebrow"><div className="eyebrow-line" /><span className="badge badge-neutral"><Users size={11} /> About</span></div>
-          <h2 className="serif" style={{ fontSize: 'clamp(30px, 4vw, 50px)', marginBottom: 22 }}>
-            We don't just write code —<br />
-            <span className="hl-italic">we design systems that survive growth.</span>
-          </h2>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.8, fontSize: 16, marginBottom: 28 }}>
-            Aaibliss is a founder-led backend & systems engineering studio focused on performance — building software that scales smoothly, stays secure, and delivers long-term business value. With 5+ years of real-world production experience.
-          </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <span className="badge badge-green"><CheckCircle2 size={11} /> Available for new projects</span>
-            <span className="badge badge-neutral" style={{ background: 'var(--surface)' }}>
-              <Globe size={11} style={{ color: 'var(--muted)' }} /> Based in India · Working seamlessly across US & Indian timezones
-            </span>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 64, alignItems: 'start' }} className="two-col">
+        {/* Left Column: Agency Pitch & Capabilities */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <div>
+            <div className="eyebrow"><div className="eyebrow-line" /><span className="badge badge-neutral"><Users size={11} /> About</span></div>
+            <h2 className="serif" style={{ fontSize: 'clamp(30px, 4vw, 48px)', marginBottom: 18 }}>
+              We don't just write code —<br />
+              <span className="hl-italic">we design systems that survive growth.</span>
+            </h2>
+            <p style={{ color: 'var(--muted)', lineHeight: 1.8, fontSize: 15, marginBottom: 20 }}>
+              Aaibliss is a founder-led backend & systems engineering studio focused on performance — building software that scales smoothly, stays secure, and delivers long-term business value.
+            </p>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <span className="badge badge-green"><CheckCircle2 size={11} /> Available for new projects</span>
+              <span className="badge badge-neutral" style={{ background: 'var(--surface)' }}>
+                <Globe size={11} style={{ color: 'var(--muted)' }} /> Based in India
+              </span>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+            {[[Layers, 'System Design'], [Server, 'Backend & APIs'], [Shield, 'Security'], [Cpu, 'Performance'], [Bot, 'AI Automation'], [Network, 'Microservices']].map(([Icon, label]) => (
+              <div key={label} className="card-flat" style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 30, height: 30, borderRadius: 6, background: 'var(--accent-lt)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Icon size={14} style={{ color: 'var(--accent)' }} />
+                </div>
+                <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text2)' }}>{label}</span>
+              </div>
+            ))}
           </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          {[[Layers, 'System Design'], [Server, 'Backend & APIs'], [Shield, 'Security'], [Cpu, 'Performance'], [Bot, 'AI Automation'], [Network, 'Microservices']].map(([Icon, label]) => (
-            <div key={label} className="card-flat" style={{ padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 34, height: 34, borderRadius: 8, background: 'var(--accent-lt)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <Icon size={15} style={{ color: 'var(--accent)' }} />
-              </div>
-              <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text2)' }}>{label}</span>
+
+        {/* Right Column: Founder Profile Card */}
+        <div className="card" style={{ padding: 32, display: 'flex', flexDirection: 'column', gap: 20, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--accent)', flexShrink: 0 }}>
+              <img src="/founder_photo.png" alt="Virendra" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
-          ))}
+            <div>
+              <h3 style={{ fontFamily: 'var(--sans)', fontSize: 18, fontWeight: 700, color: 'var(--text)', margin: 0 }}>Virendra</h3>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--accent)', fontWeight: 500, marginTop: 2 }}>Founder & Principal Engineer</div>
+            </div>
+          </div>
+          <p style={{ color: 'var(--text2)', fontSize: 13.5, lineHeight: 1.6, margin: 0 }}>
+            "Hi, I'm Virendra. I've spent 5+ years building backend systems and AI integrations for high-growth companies. At Aaibliss, I work directly with clients to write clean, performance-optimized code that solves real-world bottlenecks."
+          </p>
+          <div style={{ borderTop: '1px solid var(--border2)', paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--muted)' }}>
+              <Globe size={13} /> <span>US & Indian timezones support</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--muted)' }}>
+              <CheckCircle2 size={13} style={{ color: 'var(--green)' }} /> <span>Direct communication, no middlemen</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -367,6 +621,105 @@ const TechStack = () => (
     </div>
   </section>
 )
+
+/* ── Portfolio / Case Studies ── */
+const PortfolioSection = () => {
+  const projects = [
+    {
+      title: "PayDash: Fintech Payment Core",
+      tag: "SYSTEMS ENGINEERING",
+      desc: "Redesigned a high-traffic payment processing architecture to handle peak flash sale traffic without dropping transactions.",
+      img: "/portfolio_paydash.png",
+      metrics: [
+        { val: "38%", lbl: "Infrastructure Cost Cut" },
+        { val: "42ms", lbl: "Avg Latency (Down from 450ms)" }
+      ],
+      tech: ["Node.js", "Fastify", "Redis", "NATS", "PostgreSQL"],
+      demoUrl: "https://paydash-demo.aaibliss.com"
+    },
+    {
+      title: "Nexlify AI: Enterprise RAG Agent",
+      tag: "AI & AUTOMATION",
+      desc: "Developed a high-accuracy Retrieval-Augmented Generation agent querying over 40,000 internal training and technical docs.",
+      img: "/portfolio_nexlify.png",
+      metrics: [
+        { val: "3×", lbl: "Support Volume Handled" },
+        { val: "85%", lbl: "Auto Query Resolution" }
+      ],
+      tech: ["FastAPI", "pgvector", "Redis", "OpenAI", "LangChain"],
+      demoUrl: "https://nexlify-ai-demo.aaibliss.com"
+    },
+    {
+      title: "SaaSify: Real-Time B2B Analytics",
+      tag: "SAAS ARCHITECTURE",
+      desc: "Built a robust time-series analytical engine capable of parsing and visualizing 10 million events per day in real-time.",
+      img: "/portfolio_saasify.png",
+      metrics: [
+        { val: "10M+", lbl: "Events / Day Traversed" },
+        { val: "<200ms", lbl: "Dashboard Load Time" }
+      ],
+      tech: ["Next.js", "ClickHouse", "Go", "AWS Lambda", "Tailwind CSS"],
+      demoUrl: "https://saasify-demo.aaibliss.com"
+    }
+  ];
+
+  return (
+    <section id="portfolio" className="section">
+      <div className="inner">
+        <div className="eyebrow">
+          <div className="eyebrow-line" />
+          <span className="badge badge-neutral"><Rocket size={11} /> Case Studies</span>
+        </div>
+        <h2 className="serif" style={{ fontSize: 'clamp(30px, 4vw, 52px)', marginBottom: 20 }}>
+          Production systems built for<br />
+          <span className="hl-italic">speed, security, & scale.</span>
+        </h2>
+        <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: 600, lineHeight: 1.6, marginBottom: 48 }}>
+          Explore our real-world work demonstrating how high-performance systems and backend architecture solve core business challenges.
+        </p>
+
+        <div className="portfolio-grid">
+          {projects.map((proj, idx) => (
+            <div key={idx} className="portfolio-card">
+              <div className="portfolio-img-container">
+                <img src={proj.img} alt={proj.title} className="portfolio-img" />
+              </div>
+              <div className="portfolio-content">
+                <span className="portfolio-tag">{proj.tag}</span>
+                <h3 className="portfolio-title">{proj.title}</h3>
+                <p className="portfolio-desc">{proj.desc}</p>
+
+                <div className="portfolio-metrics">
+                  {proj.metrics.map((m, mIdx) => (
+                    <div key={mIdx} className="portfolio-metric-item">
+                      <span className="portfolio-metric-val">{m.val}</span>
+                      <span className="portfolio-metric-lbl">{m.lbl}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="portfolio-tech-list">
+                  {proj.tech.map((t, tIdx) => (
+                    <span key={tIdx} className="portfolio-tech-chip">{t}</span>
+                  ))}
+                </div>
+
+                <a
+                  href={proj.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="portfolio-link-btn"
+                >
+                  Explore Live Demo <ArrowUpRight size={14} />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 /* ── Approach ── */
 const Approach = () => (
@@ -455,30 +808,128 @@ const ServicesSection = () => (
   </section>
 )
 
+/* ── Pricing & Engagement Models ── */
+const PricingSection = ({ onProjectClick }) => {
+  const models = [
+    {
+      title: "Project-Based",
+      badge: "Fixed Scope",
+      desc: "Best for building defined MVPs, backend migrations, or shipping a standalone AI agent.",
+      cost: "Custom",
+      period: "per project",
+      features: [
+        "Rigorous scope & timeline mapping",
+        "Complete architecture blueprint",
+        "Direct founder-led execution",
+        "Comprehensive integration testing",
+        "30 days post-launch support"
+      ],
+      btnText: "Get a Scope Estimate"
+    },
+    {
+      title: "Monthly Retainer",
+      badge: "Fractional CTO / Dev",
+      desc: "Best for growing teams needing ongoing scaling, database tuning, or fractional leadership.",
+      cost: "$4,500",
+      period: "/ month",
+      popular: true,
+      features: [
+        "Prioritized engineering support",
+        "System scaling & query optimization",
+        "Continuous security hardening",
+        "Slack integration & weekly check-ins",
+        "Flexible, month-to-month terms"
+      ],
+      btnText: "Hire on Retainer"
+    },
+    {
+      title: "Consulting Call",
+      badge: "1:1 Advisory",
+      desc: "Best for technical brainstorming, backend reviews, architecture audits, or RAG strategy.",
+      cost: "$250",
+      period: "/ hour",
+      features: [
+        "Focused 60-min video call",
+        "Pre-call brief review",
+        "Architectural & performance audits",
+        "Actionable code recommendations",
+        "Call recording & summary notes"
+      ],
+      btnText: "Book a Consultation"
+    }
+  ];
+
+  return (
+    <section id="pricing" className="section section-alt">
+      <div className="inner">
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div className="eyebrow" style={{ justifyContent: 'center' }}>
+            <div className="eyebrow-line" />
+            <span className="badge badge-neutral"><Layers size={11} /> Engagement Models</span>
+            <div className="eyebrow-line" />
+          </div>
+          <h2 className="serif" style={{ fontSize: 'clamp(30px, 4vw, 52px)', marginTop: 10 }}>
+            How we can <span className="hl-italic">work together.</span>
+          </h2>
+          <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: 580, margin: '16px auto 0', lineHeight: 1.6 }}>
+            Clear pricing, direct communication, and aligned incentives. No hidden fees or management overhead.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }} className="three-col">
+          {models.map((model, idx) => (
+            <div key={idx} className={`pricing-card ${model.popular ? 'pricing-card-popular' : ''}`}>
+              {model.popular && <span className="pricing-badge">Most Popular</span>}
+              <h3 className="pricing-title">{model.title}</h3>
+              <p className="pricing-desc">{model.desc}</p>
+              
+              <div className="pricing-cost">
+                {model.cost}
+                <span className="pricing-period">{model.period}</span>
+              </div>
+
+              <ul className="pricing-features">
+                {model.features.map((f, fIdx) => (
+                  <li key={fIdx} className="pricing-feature-item">
+                    <CheckCircle2 size={16} style={{ color: model.popular ? 'var(--accent2)' : 'var(--green)', flexShrink: 0, marginTop: 2 }} />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button 
+                onClick={onProjectClick} 
+                className={`pricing-btn ${model.popular ? 'btn-primary' : 'btn-ghost'}`}
+              >
+                {model.btnText}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 /* ── Testimonials ── */
 const Testimonials = () => (
   <section className="section">
     <div className="inner">
       <div className="eyebrow"><div className="eyebrow-line" /><span className="badge badge-neutral"><Star size={11} /> Testimonials</span></div>
       <h2 className="serif" style={{ fontSize: 'clamp(30px, 4vw, 52px)', marginBottom: 56, maxWidth: 600 }}>
-        Trusted by founders who value <span className="hl-italic">execution.</span>
+        Trusted by 1 founders who value <span className="hl-italic">execution.</span>
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }} className="three-col">
         {[
           {
-            quote: "Aaibliss transformed our messy monolith into a scalable microservices architecture. Our server costs dropped by 40% and our uptime has been flawless since the migration.",
-            author: "Sarah Jenkins",
-            role: "CTO, FinFlow",
+            quote: "We were hemorrhaging money on over-provisioned EC2s. Aaibliss redesigned our data pipeline with Redis caching and DB query optimization — our monthly infra bill dropped by 38% within the first month. Genuinely one of the best engineering decisions we made.",
+            author: "Rohan Kapoor",
+            role: "CTO · PayDash (Fintech SaaS)",
           },
           {
-            quote: "Working with a founder-led engineering studio made all the difference. No layers of management—just deep technical expertise and systems that are built to scale on day one.",
-            author: "David Chen",
-            role: "Founder, OmniRetail",
-          },
-          {
-            quote: "The RAG chatbot system they built for our customer support automated 60% of our daily queries. The performance is incredible and the integration was completely seamless.",
-            author: "Elena Rodriguez",
-            role: "VP Operations, SaaSify",
+            quote: "We brought Aaibliss in to build a RAG chatbot for our internal knowledge base. Within three weeks we had a production-ready assistant that pulls from 40,000+ documents with surprisingly accurate answers. Our support team now handles 3× the volume with the same headcount.",
+            author: "Arjun Pillai",
+            role: "VP Product · Nexlify (B2B SaaS)",
           }
         ].map((t, i) => (
           <div key={i} className="card" style={{ padding: 32, display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -617,8 +1068,8 @@ const Footer = () => (
           <a href="mailto:hello@aaibliss.com" style={{ fontSize: 14, color: 'var(--text2)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text2)'}>
             <Mail size={16} style={{ color: 'var(--muted)' }} /> hello@aaibliss.com
           </a>
-          <a href="tel:+1234567890" style={{ fontSize: 14, color: 'var(--text2)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text2)'}>
-            <Phone size={16} style={{ color: 'var(--muted)' }} /> +1 (234) 567-890
+          <a href="tel:+919183298985" style={{ fontSize: 14, color: 'var(--text2)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text2)'}>
+            <Phone size={16} style={{ color: 'var(--muted)' }} /> +91 9183298985
           </a>
           <div style={{ fontSize: 14, color: 'var(--text2)', display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
             <Globe size={16} style={{ color: 'var(--muted)' }} /> Based in India · Working seamlessly across US & Indian timezones
@@ -801,7 +1252,7 @@ const ProjectModal = ({ onClose }) => {
 
 const WhatsAppFAB = () => (
   <a
-    href="https://wa.me/1234567890"
+    href="https://wa.me/9183298985"
     target="_blank"
     rel="noopener noreferrer"
     style={{
@@ -849,9 +1300,11 @@ export default function HomePage() {
       <About />
       <WhatWeBuild />
       <TechStack />
+      <PortfolioSection />
       <Approach />
       <WhyUs />
       <ServicesSection />
+      <PricingSection onProjectClick={openProject} />
       <Testimonials />
       <BlogSection />
       <Vision />
