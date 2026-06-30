@@ -114,7 +114,7 @@ const Nav = ({ onProjectClick }) => {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* --Mobile Drawer-- */}
       {open && (
         <div className="fixed top-20 left-0 right-0 z-40 bg-[#F4F5F7]/95 backdrop-blur-2xl border-b border-[#0B132B]/10 p-6 flex flex-col gap-3 md:hidden animate-in fade-in slide-in-from-top-4 duration-200">
           {[
