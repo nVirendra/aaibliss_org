@@ -7,67 +7,7 @@ import {
   ArrowRight, ArrowUpRight, Cpu, Network, ChevronRight, Sparkles,
   Globe, Layers, Terminal, Zap, LineChart, BookOpen, Menu, X, Star, Quote,
   Youtube, Linkedin, Github, Calendar, Phone
-} from 'lucide-react'/* ── Inline Custom Styles ── */
-const Styles = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
-    .font-sans {
-      font-family: 'Inter', sans-serif !important;
-    }
-    .font-serif {
-      font-family: 'Inter', sans-serif !important;
-    }
-    .font-mono {
-      font-family: 'JetBrains Mono', monospace !important;
-    }
-
-    .dot-grid {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background-image: radial-gradient(circle, rgba(11, 19, 43, 0.04) 1px, transparent 1px);
-      background-size: 32px 32px;
-      opacity: 0.8;
-    }
-
-    .hero-noise {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.01;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.7) !important;
-      backdrop-filter: blur(16px) !important;
-      border: 1px solid rgba(11, 19, 43, 0.08) !important;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-    }
-
-    .glass-panel:hover {
-      border-color: rgba(0, 229, 255, 0.6) !important;
-      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.08), inset 0 0 12px rgba(255, 255, 255, 0.5) !important;
-      transform: translateY(-2px) !important;
-    }
-
-    /* Custom scrollbar matching brand design */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #F4F5F7;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(11, 19, 43, 0.15);
-      border-radius: 5px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0, 229, 255, 0.5);
-    }
-  `}</style>
-)
+} from 'lucide-react'
 
 /* ── Nav Component ── */
 const Nav = ({ onProjectClick }) => {
@@ -76,7 +16,7 @@ const Nav = ({ onProjectClick }) => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-20 bg-[#F4F5F7]/95 backdrop-blur-xl border-b border-[#0B132B]/10">
         <div className="flex items-center">
-          <img src="/get-by-tech-text-logo-01-JULY-2026.png" alt="GetByTech" className="h-8 w-auto" />
+          <img src="/get-by-tech-final-logo.png" alt="GetByTech" className="h-8 w-auto" />
         </div>
         
         <ul className="hidden md:flex items-center gap-1 list-none">
@@ -152,8 +92,8 @@ const Hero = ({ onProjectClick }) => (
     <div className="hero-noise" />
     
     {/* Ambient Glows */}
-    <div className="absolute top-[-10%] right-[-5%] w-[500px] md:w-[700px] h-[500px] md:h-[700px] rounded-full bg-radial from-[#00E5FF]/15 to-transparent pointer-events-none blur-3xl" />
-    <div className="absolute bottom-[5%] left-[-8%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-radial from-[#00E5FF]/8 to-transparent pointer-events-none blur-3xl" />
+    <div className="absolute top-[-10%] right-[-5%] w-[500px] md:w-[700px] h-[500px] md:h-[700px] rounded-full bg-[#00E5FF]/10 pointer-events-none blur-3xl" />
+    <div className="absolute bottom-[5%] left-[-8%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-[#00E5FF]/5 pointer-events-none blur-3xl" />
 
     <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24 w-full">
       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#0B132B] text-xs font-semibold tracking-wide mb-6">
@@ -161,7 +101,7 @@ const Hero = ({ onProjectClick }) => (
       </div>
 
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-[#0B132B] leading-[1.1] mb-6 max-w-4xl">
-        We build software products that <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">scale</span> & grow your business.
+        We build software products that <span className="text-[#00A8CC] italic">scale</span> & grow your business.
       </h1>
 
       <p className="text-[#64748B] text-lg md:text-xl max-w-2xl leading-relaxed mb-8">
@@ -216,7 +156,7 @@ const About = () => (
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
             We don't just write code — <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">we engineer custom business growth solutions.</span>
+            <span className="text-[#00A8CC] italic">we engineer custom business growth solutions.</span>
           </h2>
           <p className="text-[#64748B] text-base md:text-lg leading-relaxed">
             At GetByTech, we work directly with founders and product teams to translate complex business ideas into robust, production-ready software systems. Our process is zero-overhead, highly collaborative, and laser-focused on rapid business value.
@@ -244,7 +184,7 @@ const About = () => (
         {/* Right Founder Column */}
         <div className="lg:col-span-5">
           <div className="glass-panel p-8 rounded-3xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#00E5FF]/10 to-transparent blur-xl" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#00E5FF]/10 blur-xl" />
             
             <div className="flex items-center gap-5 mb-6">
               <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#00E5FF] flex-shrink-0">
@@ -325,7 +265,7 @@ const Services = () => {
             <Package size={12} /> Core Offerings
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-            Comprehensive software development to build, scale, and <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">grow</span> your vision.
+            Comprehensive software development to build, scale, and <span className="text-[#00A8CC] italic">grow</span> your vision.
           </h2>
           <p className="text-[#64748B] text-base md:text-lg">
             We provide specialized engineering services to address startup constraints and support enterprise expansion objectives.
@@ -363,9 +303,9 @@ const Services = () => {
 /* ── Developer Hiring Dedicated Section ── */
 const DeveloperHiring = ({ onProjectClick }) => (
   <section id="hiring" className="py-24 bg-white/50 border-t border-[#0B132B]/10 relative scroll-mt-10">
-    <div className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] rounded-full bg-radial from-[#00E5FF]/8 to-transparent pointer-events-none blur-3xl" />
+    <div className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] rounded-full bg-[#00E5FF]/5 pointer-events-none blur-3xl" />
     <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-      <div className="glass-panel p-8 md:p-12 rounded-3xl border border-[#00E5FF]/20 bg-gradient-to-b from-[#00E5FF]/5 to-[#F4F5F7]">
+      <div className="glass-panel p-8 md:p-12 rounded-3xl border border-[#00E5FF]/20 bg-[#00E5FF]/5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5FF]/15 border border-[#00E5FF]/30 text-[#0B132B] text-xs font-semibold">
@@ -449,7 +389,7 @@ const Learners = () => {
               <BookOpen size={12} className="text-[#00A8CC]" /> For Learners
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-              We train the next generation of <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">engineers.</span>
+              We train the next generation of <span className="text-[#00A8CC] italic">engineers.</span>
             </h2>
             <p className="text-[#64748B] text-base leading-relaxed">
               At GetByTech, we maintain deep technical mastery by constantly writing training curricula and sharing real-world software templates with developers globally. Our dedication to learning ensures that the systems we build for our clients utilize the most optimized, up-to-date architectural patterns.
@@ -537,7 +477,7 @@ const CaseStudies = () => {
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
               Production systems built for <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">speed, security, & scale.</span>
+              <span className="text-[#00A8CC] italic">speed, security, & scale.</span>
             </h2>
           </div>
           <p className="text-[#64748B] text-base max-w-md">
@@ -550,7 +490,6 @@ const CaseStudies = () => {
             <div key={idx} className="glass-panel rounded-2xl overflow-hidden flex flex-col h-full hover:scale-[1.02] transition-transform duration-300 group bg-white">
               <div className="h-48 overflow-hidden bg-slate-100 border-b border-[#0B132B]/10 relative">
                 <img src={proj.img} alt={proj.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#F4F5F7] via-transparent to-transparent opacity-30" />
               </div>
               <div className="p-6 flex flex-col justify-between flex-grow">
                 <div className="space-y-4">
@@ -781,7 +720,7 @@ const Testimonials = () => {
               <Star size={12} /> Testimonials
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-              Trusted by tech founders who prioritize <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">execution.</span>
+              Trusted by tech founders who prioritize <span className="text-[#00A8CC] italic">execution.</span>
             </h2>
           </div>
         </div>
@@ -806,13 +745,13 @@ const Testimonials = () => {
 /* ── CTA Component ── */
 const CTA = ({ onProjectClick }) => (
   <section className="py-24 bg-[#F4F5F7] border-t border-[#0B132B]/10 relative overflow-hidden">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-radial from-[#00E5FF]/10 to-transparent pointer-events-none blur-3xl" />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-[#00E5FF]/8 pointer-events-none blur-3xl" />
     <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-8">
       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#0B132B] text-xs font-semibold">
         <Mail size={11} /> Let's Connect
       </div>
       <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-        Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">That Lasts</span>
+        Let's Build Something <span className="text-[#00A8CC] italic">That Lasts</span>
       </h2>
       <p className="text-[#64748B] text-base md:text-lg max-w-xl mx-auto leading-relaxed">
         Work directly with custom software and MVP engineering specialists. Build a reliable technical foundation with zero communication layers.
@@ -853,7 +792,7 @@ const Footer = () => (
     <div className="max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-start justify-between gap-10">
       <div className="space-y-4">
         <div className="flex items-center">
-          <img src="/get-by-tech-text-logo-01-JULY-2026.png" alt="GetByTech" className="h-7 w-auto" />
+          <img src="/get-by-tech-final-logo.png" alt="GetByTech" className="h-7 w-auto" />
         </div>
         <div className="space-y-2 text-xs md:text-sm text-[#64748B]">
           <a href="mailto:hello@GetByTech.com" className="flex items-center gap-2 hover:text-[#0B132B] transition-colors">
@@ -921,7 +860,7 @@ const ProjectModal = ({ onClose }) => {
         {/* Modal Header */}
         <div className="p-8 border-b border-[#0B132B]/10 flex-shrink-0 bg-[#F4F5F7]/50">
           <h3 className="text-2xl md:text-3xl font-extrabold text-[#0B132B] tracking-tight">
-            Start a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B132B] to-[#00E5FF] italic">Conversation</span>
+            Start a <span className="text-[#00A8CC] italic">Conversation</span>
           </h3>
           <p className="text-[#64748B] text-sm mt-2">
             Let us know what you are looking for. We will respond within 24 hours.
@@ -1259,7 +1198,6 @@ export default function HomePage() {
 
   return (
     <div className="bg-[#F4F5F7] min-h-screen text-[#0B132B] selection:bg-[#00E5FF]/30 selection:text-[#0B132B] font-sans antialiased">
-      <Styles />
       <Nav onProjectClick={openProject} />
       <Hero onProjectClick={openProject} />
       <About />

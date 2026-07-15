@@ -6,10 +6,10 @@ import { ArrowLeft } from 'lucide-react'
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-[#F4F5F7] flex flex-col items-center justify-center p-6 text-center select-none relative">
-      <div className="absolute inset-0 pointer-events-none opacity-30 bg-radial from-[#00E5FF]/8 to-transparent blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none opacity-30 bg-[#00E5FF]/8 blur-3xl" />
       <div className="relative z-10 max-w-md space-y-6">
         <div className="mx-auto mb-2">
-          <img src="/get-by-tech-text-logo-01-JULY-2026.png" alt="GetByTech" className="h-12 w-auto mx-auto" />
+          <img src="/get-by-tech-final-logo.png" alt="GetByTech" className="h-12 w-auto mx-auto" />
         </div>
         
         <h1 className="text-4xl md:text-5xl font-bold text-[#0B132B] tracking-tight">
