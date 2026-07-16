@@ -218,6 +218,24 @@ const About = () => (
 
 /* ── Services Section ── */
 const Services = () => {
+  const areas = [
+    {
+      title: "AI-Powered Business Systems",
+      items: ["RAG chatbots & assistants", "AI analytics & insights", "Workflow automation pipelines"],
+      icon: Bot
+    },
+    {
+      title: "Startup & Enterprise Solutions",
+      items: ["Internal tools & portals", "Legacy system modernization", "Backend refactoring"],
+      icon: Building2
+    },
+    {
+      title: "Architecture",
+      items: ["Modular Monolith Design", "Domain-Driven Architectures", "Maintainable Codebases"],
+      icon: Layers
+    }
+  ]
+
   const businessServices = [
     {
       icon: Rocket,
@@ -231,12 +249,7 @@ const Services = () => {
       desc: "Fast-track your validation process. We build launch-ready, high-fidelity Minimum Viable Products in weeks so you can secure customers or raise funding.",
       tags: ["Rapid Prototyping", "Auth", "Payments", "SEO"]
     },
-    {
-      icon: Users,
-      title: "Dedicated Developer Hiring",
-      desc: "Scale your team instantly. Access senior, vetted engineers who integrate directly into your workflows to accelerate product feature delivery.",
-      tags: ["Senior Talents", "Staff Augmentation", "Slack Integration"]
-    },
+   
     {
       icon: Globe,
       title: "Custom Web & App Solutions",
@@ -249,12 +262,7 @@ const Services = () => {
       desc: "Tackle bottlenecks. We optimize database queries, implement caching structures, configure microservices, and reduce bloated cloud bills.",
       tags: ["Redis", "ClickHouse", "AWS Cost Optimization"]
     },
-    {
-      icon: LineChart,
-      title: "Client Acquisition & Growth Tools",
-      desc: "Engines to grow your company. We design high-converting lead loops, automated SEO funnels, analytics tooling, and digital marketing tech setups.",
-      tags: ["SEO Frameworks", "Lead Gen Tools", "Metric Tracking"]
-    }
+    
   ]
 
   return (
@@ -291,6 +299,40 @@ const Services = () => {
                     </span>
                   ))}
                 </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Expertise Focus Sub-section */}
+        <div className="text-center max-w-2xl mx-auto mt-20 mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0B132B]/10 text-[#64748B] text-xs font-mono">
+            <Target size={12} className="text-[#00A8CC]" /> Expertise Focus
+          </div>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
+            Specialized engineering for complex needs
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {areas.map((area, idx) => {
+            const Icon = area.icon
+            return (
+              <div key={idx} className="glass-panel p-8 rounded-2xl bg-white border border-[#0B132B]/10 flex flex-col h-full hover:scale-[1.02] transition-transform duration-300">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center">
+                    <Icon size={20} className="text-[#0B132B]" />
+                  </div>
+                  <h3 className="text-[#0B132B] text-lg font-bold leading-snug">{area.title}</h3>
+                </div>
+                <ul className="space-y-3 flex-grow list-none">
+                  {area.items.map((item, iIdx) => (
+                    <li key={iIdx} className="flex items-center gap-3 text-[#64748B] text-sm">
+                      <CheckCircle2 size={16} className="text-[#00E5FF] flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )
           })}
@@ -1004,66 +1046,6 @@ const ProjectModal = ({ onClose }) => {
   )
 }
 
-/* ── Focus Areas Section ── */
-const FocusAreas = () => {
-  const areas = [
-    {
-      title: "AI-Powered Business Systems",
-      items: ["RAG chatbots & assistants", "AI analytics & insights", "Workflow automation pipelines"],
-      icon: Bot
-    },
-    {
-      title: "Startup & Enterprise Solutions",
-      items: ["Internal tools & portals", "Legacy system modernization", "Backend refactoring"],
-      icon: Building2
-    },
-    {
-      title: "Architecture",
-      items: ["Modular Monolith Design", "Domain-Driven Architectures", "Maintainable Codebases"],
-      icon: Layers
-    }
-  ]
-
-  return (
-    <section className="py-24 bg-[#F4F5F7] border-t border-[#0B132B]/10 scroll-mt-10">
-      <div className="max-w-6xl mx-auto px-6 md:px-12">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0B132B]/10 text-[#64748B] text-xs font-mono">
-            <Target size={12} className="text-[#00A8CC]" /> Expertise Focus
-          </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-            Specialized engineering for complex needs
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {areas.map((area, idx) => {
-            const Icon = area.icon
-            return (
-              <div key={idx} className="glass-panel p-8 rounded-2xl bg-white border border-[#0B132B]/10 flex flex-col h-full hover:scale-[1.02] transition-transform duration-300">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center">
-                    <Icon size={20} className="text-[#0B132B]" />
-                  </div>
-                  <h3 className="text-[#0B132B] text-lg font-bold leading-snug">{area.title}</h3>
-                </div>
-                <ul className="space-y-3 flex-grow list-none">
-                  {area.items.map((item, iIdx) => (
-                    <li key={iIdx} className="flex items-center gap-3 text-[#64748B] text-sm">
-                      <CheckCircle2 size={16} className="text-[#00E5FF] flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 /* ── How We Work Section ── */
 const HowWeWork = () => {
   const steps = [
@@ -1153,7 +1135,6 @@ export default function HomePage() {
       <About />
       <TechStack />
       <HowWeWork />
-      <FocusAreas />
       <Services />
       <Learners />
       <CaseStudies />
