@@ -4,86 +4,14 @@ import { useState } from 'react'
 import {
   Code, Database, Server, Shield, Rocket, CheckCircle2,
   Users, Bot, Building2, Wrench, Package, Target, Mail,
-  ArrowRight, ArrowUpRight, Cpu, Network, ChevronRight, Sparkles,
-  Globe, Layers, Terminal, Zap, LineChart, BookOpen, Menu, X, Star, Quote,
-  Youtube, Linkedin, Github, Calendar, Phone
+  ArrowRight, ArrowUpRight, Cpu, Network, Sparkles,
+  Globe, Layers, Terminal, Zap, Star, Quote,
+  Calendar
 } from 'lucide-react'
-
-/* ── Nav Component ── */
-const Nav = ({ onProjectClick }) => {
-  const [open, setOpen] = useState(false)
-  return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-20 bg-[#F4F5F7]/95 backdrop-blur-xl border-b border-[#0B132B]/10">
-        <div className="flex items-center">
-          <img src="/get-by-tech-final-logo.png" alt="GetByTech" className="h-8 w-auto" />
-        </div>
-        
-        <ul className="hidden md:flex items-center gap-1 list-none">
-          {[
-            ['#services', 'Services'],
-            ['#about', 'About Us'],
-            ['#case-studies', 'Case Studies'],
-            ['#learners', 'For Learners'],
-            ['#pricing', 'Pricing']
-          ].map(([href, label]) => (
-            <li key={label}>
-              <a href={href} className="px-4 py-2 rounded-lg text-[#64748B] hover:text-[#0B132B] text-sm font-medium transition-colors duration-200">
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-4">
-          <button 
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-sm transition-all duration-200 shadow-md shadow-[#00E5FF]/10 active:scale-95 cursor-pointer animate-pulse"
-            onClick={onProjectClick}
-          >
-            <Mail size={14} /> Start a Project
-          </button>
-          
-          <button 
-            onClick={() => setOpen(o => !o)} 
-            className="md:hidden p-2 rounded-lg text-[#64748B] hover:text-[#0B132B] transition-colors cursor-pointer" 
-            id="hamburger"
-            aria-label="Toggle menu"
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-      </nav>
-
-      {/* --Mobile Drawer-- */}
-      {open && (
-        <div className="fixed top-20 left-0 right-0 z-40 bg-[#F4F5F7]/95 backdrop-blur-2xl border-b border-[#0B132B]/10 p-6 flex flex-col gap-3 md:hidden animate-in fade-in slide-in-from-top-4 duration-200">
-          {[
-            ['#services', 'Services'],
-            ['#about', 'About Us'],
-            ['#case-studies', 'Case Studies'],
-            ['#learners', 'For Learners'],
-            ['#pricing', 'Pricing']
-          ].map(([href, label]) => (
-            <a
-              key={label} 
-              href={href} 
-              className="px-4 py-3 rounded-lg text-[#64748B] hover:text-[#0B132B] text-base font-medium transition-colors"
-              onClick={() => setOpen(false)}
-            >
-              {label}
-            </a>
-          ))}
-          <button 
-            className="w-full flex items-center justify-center gap-2 px-5 py-3.5 mt-2 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-base transition-all duration-200"
-            onClick={() => { setOpen(false); onProjectClick(); }}
-          >
-            <Mail size={16} /> Start a Project
-          </button>
-        </div>
-      )}
-    </>
-  )
-}
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
+import ProjectModal from '@/components/ProjectModal'
+import WhatsAppFAB from '@/components/WhatsAppFAB'
 
 /* ── Hero Component ── */
 const Hero = ({ onProjectClick }) => (
@@ -336,82 +264,6 @@ const Services = () => {
               </div>
             )
           })}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ── For Learners Section (Secondary / Credibility Builder) ── */
-const Learners = () => {
-  const learningBlocks = [
-    {
-      icon: Code,
-      title: "Programming Tutorials",
-      desc: "Step-by-step technical guides and structural patterns for modern software stacks. We write about what we learn building actual customer software."
-    },
-    {
-      icon: Wrench,
-      title: "Real-World Projects",
-      desc: "Learn by building production-ready clones, microservices, and AI utilities. Access architectural reviews that mirror real-world systems."
-    },
-    {
-      icon: Code,
-      title: "Web & Mobile Development",
-      desc: "Deep dives into React, Next.js, FastAPI, Node.js, and mobile design patterns. Establish robust foundations that bypass initial developer pitfalls."
-    },
-    {
-      icon: Bot,
-      title: "AI, APIs & Latest Tech",
-      desc: "Tutorials on integrating Large Language Models (LLMs), pgvector databases, LangChain pipelines, and setting up secure third-party APIs."
-    },
-    {
-      icon: Target,
-      title: "Career Guidance in Tech",
-      desc: "Guidance on resume formatting, building high-conversion portfolios, developer interview structures, and accelerating progression to senior roles."
-    }
-  ]
-
-  return (
-    <section id="learners" className="py-24 bg-[#F4F5F7] border-t border-[#0B132B]/10 scroll-mt-10">
-      <div className="max-w-6xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
-          <div className="lg:col-span-5 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0B132B]/10 text-[#64748B] text-xs font-mono">
-              <BookOpen size={12} className="text-[#00A8CC]" /> For Learners
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-              We train the next generation of <span className="text-[#00A8CC] italic">engineers.</span>
-            </h2>
-            <p className="text-[#64748B] text-base leading-relaxed">
-              At GetByTech, we maintain deep technical mastery by constantly writing training curricula and sharing real-world software templates with developers globally. Our dedication to learning ensures that the systems we build for our clients utilize the most optimized, up-to-date architectural patterns.
-            </p>
-            <div className="pt-4">
-              <a 
-                href="https://calendly.com/" 
-                target="_blank" 
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-[#0B132B] hover:text-[#00E5FF] font-bold border-b-2 border-[#00E5FF] pb-0.5 transition-colors group"
-              >
-                Book a 1:1 Career Guidance Call <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-[#00E5FF]" />
-              </a>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {learningBlocks.map((block, i) => {
-              const Icon = block.icon
-              return (
-                <div key={i} className="p-6 rounded-2xl bg-white border border-[#0B132B]/10 shadow-sm space-y-3 hover:border-[#00E5FF]/40 transition-all duration-300">
-                  <div className="w-10 h-10 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center">
-                    <Icon size={16} className="text-[#0B132B]" />
-                  </div>
-                  <h3 className="text-[#0B132B] text-base font-bold leading-snug">{block.title}</h3>
-                  <p className="text-[#64748B] text-xs leading-relaxed">{block.desc}</p>
-                </div>
-              )
-            })}
-          </div>
         </div>
       </div>
     </section>
@@ -768,284 +620,6 @@ const CTA = ({ onProjectClick }) => (
   </section>
 )
 
-/* ── SocialIcon Component ── */
-const SocialIcon = ({ icon: Icon, href }) => (
-  <a 
-    href={href} 
-    className="flex items-center justify-center w-9 h-9 rounded-full bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] hover:text-[#0B132B] hover:border-[#00E5FF] hover:bg-[#00E5FF]/15 transition-all duration-200"
-  >
-    <Icon size={16} />
-  </a>
-)
-
-/* ── Footer Component ── */
-const Footer = () => (
-  <footer className="bg-white border-t border-[#0B132B]/10 py-16">
-    <div className="max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-start justify-between gap-10">
-      <div className="space-y-4">
-        <div className="flex items-center">
-          <img src="/get-by-tech-final-logo.png" alt="GetByTech" className="h-7 w-auto" />
-        </div>
-        <div className="space-y-2 text-xs md:text-sm text-[#64748B]">
-          <a href="mailto:hello@GetByTech.com" className="flex items-center gap-2 hover:text-[#0B132B] transition-colors">
-            <Mail size={14} className="text-[#64748B]" /> hello@GetByTech.com
-          </a>
-          <a href="tel:+919183298985" className="flex items-center gap-2 hover:text-[#0B132B] transition-colors">
-            <Phone size={14} className="text-[#64748B]" /> +91 9183298985
-          </a>
-          <div className="flex items-center gap-2 text-[#64748B]">
-            <Globe size={14} /> Based in India · Working across Global Timezones
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-4 items-start md:items-end">
-        <div className="flex gap-3">
-          <SocialIcon icon={Github} href="#" />
-          <SocialIcon icon={Linkedin} href="#" />
-          <SocialIcon icon={Youtube} href="#" />
-        </div>
-        <div className="flex gap-2">
-          {['Build', 'Scale', 'Staff'].map(t => (
-            <span key={t} className="px-2 py-0.5 rounded bg-[#F4F5F7] border border-[#0B132B]/10 text-[10px] font-mono text-[#64748B]">
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-    
-    <div className="max-w-6xl mx-auto px-6 md:px-12 mt-12 pt-8 border-t border-[#0B132B]/10 text-center">
-      <p className="text-[#64748B]/60 text-xs font-mono">© 2026 GetByTech · Custom Software & MVP Engineering</p>
-    </div>
-  </footer>
-)
-
-/* ── Project Modal Component ── */
-const ProjectModal = ({ onClose }) => {
-  const [submitted, setSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [inquiryType, setInquiryType] = useState('Business') // 'Business' or 'Learner'
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitted(true)
-    }, 1200)
-  }
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0B132B]/40 backdrop-blur-md overflow-y-auto">
-      <div className="bg-white border border-[#0B132B]/15 rounded-3xl w-full max-w-2xl overflow-hidden relative shadow-2xl shadow-[#0B132B]/10 max-h-[90vh] flex flex-col">
-        
-        {/* Close Button */}
-        <button 
-          onClick={onClose} 
-          className="absolute top-4 right-4 p-2 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] hover:text-[#0B132B] transition-colors cursor-pointer z-10"
-          aria-label="Close modal"
-        >
-          <X size={18} />
-        </button>
-
-        {/* Modal Header */}
-        <div className="p-8 border-b border-[#0B132B]/10 flex-shrink-0 bg-[#F4F5F7]/50">
-          <h3 className="text-2xl md:text-3xl font-extrabold text-[#0B132B] tracking-tight">
-            Start a <span className="text-[#00A8CC] italic">Conversation</span>
-          </h3>
-          <p className="text-[#64748B] text-sm mt-2">
-            Let us know what you are looking for. We will respond within 24 hours.
-          </p>
-
-          {/* Toggle Type Selector */}
-          <div className="flex gap-2 p-1 bg-[#F4F5F7] border border-[#0B132B]/10 rounded-xl mt-6">
-            <button 
-              type="button" 
-              onClick={() => setInquiryType('Business')}
-              className={`flex-1 py-2.5 rounded-lg text-xs font-semibold tracking-wide transition-all cursor-pointer ${inquiryType === 'Business' ? 'bg-[#00E5FF] text-[#0B132B] shadow-sm' : 'text-[#64748B] hover:text-[#0B132B] bg-transparent'}`}
-            >
-              Build Product / Hire Developers
-            </button>
-            <button 
-              type="button" 
-              onClick={() => setInquiryType('Learner')}
-              className={`flex-1 py-2.5 rounded-lg text-xs font-semibold tracking-wide transition-all cursor-pointer ${inquiryType === 'Learner' ? 'bg-[#00E5FF] text-[#0B132B] shadow-sm' : 'text-[#64748B] hover:text-[#0B132B] bg-transparent'}`}
-            >
-              For Learners (Guidance / Course)
-            </button>
-          </div>
-        </div>
-
-        {/* Form Body / Success State */}
-        <div className="overflow-y-auto flex-grow bg-white">
-          {submitted ? (
-            <div className="p-12 text-center flex flex-col items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/20 flex items-center justify-center mb-6">
-                <CheckCircle2 size={32} className="text-[#0B132B]" />
-              </div>
-              <h4 className="text-[#0B132B] text-xl font-bold mb-2">Request Received!</h4>
-              <p className="text-[#64748B] text-sm max-w-sm mx-auto leading-relaxed mb-8">
-                {inquiryType === 'Business' 
-                  ? "We will review your product parameters and reach back to schedule an architecture call."
-                  : "We will check our program schedule and follow up via email with guidelines."}
-              </p>
-              <button 
-                type="button" 
-                className="px-6 py-2.5 rounded-xl bg-[#F4F5F7] hover:bg-[#slate-100] text-[#0B132B] border border-[#0B132B]/10 text-sm font-semibold transition-colors cursor-pointer"
-                onClick={onClose}
-              >
-                Close Window
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="p-8 space-y-6">
-              
-              {/* Common Fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Full Name *</label>
-                  <input 
-                    required 
-                    type="text" 
-                    placeholder="John Doe" 
-                    className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Email Address *</label>
-                  <input 
-                    required 
-                    type="email" 
-                    placeholder="john@example.com" 
-                    className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                  />
-                </div>
-              </div>
-
-              {/* Conditional Business Fields */}
-              {inquiryType === 'Business' ? (
-                <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Company Name</label>
-                      <input 
-                        type="text" 
-                        placeholder="Company Inc." 
-                        className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Inquiry Type *</label>
-                      <select 
-                        required 
-                        className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] focus:text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                      >
-                        <option value="SaaS Development">Software Product Development</option>
-                        <option value="MVP Building">MVP Building for Startups</option>
-                        <option value="Developer Hiring">Dedicated Developer Staffing</option>
-                        <option value="System Optimization">Scale & System Optimization</option>
-                        <option value="Custom Project">Other Custom Project</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Estimated Budget *</label>
-                      <select 
-                        required 
-                        className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] focus:text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                      >
-                        <option value="">Select budget range</option>
-                        <option value="Under $5,000">Under $5,000</option>
-                        <option value="$5,000 - $15,000">$5,000 - $15,000</option>
-                        <option value="$15,000 - $30,000">$15,000 - $30,000</option>
-                        <option value="$30,000+">$30,000+</option>
-                      </select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Desired Timeline *</label>
-                      <select 
-                        required 
-                        className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] focus:text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                      >
-                        <option value="">Select start time</option>
-                        <option value="Immediately">Immediately</option>
-                        <option value="Within 1 month">Within 1 month</option>
-                        <option value="1-3 months">1-3 months</option>
-                        <option value="Exploring options">Exploring options</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Project Description *</label>
-                    <textarea 
-                      required 
-                      rows={3} 
-                      placeholder="Outline the core functionality and what challenges you are looking to address..." 
-                      className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors resize-vertical"
-                    />
-                  </div>
-                </>
-              ) : (
-                /* Conditional Learner Fields */
-                <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Focus Interest *</label>
-                      <select 
-                        required 
-                        className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] focus:text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                      >
-                        <option value="Tutorials">Programming Tutorials</option>
-                        <option value="Real Projects">Building Real-World Projects</option>
-                        <option value="Career Advisory">Tech Career Guidance</option>
-                        <option value="AI Integrations">AI & API Development</option>
-                      </select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">Current Coding Experience</label>
-                      <select 
-                        className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] focus:text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors"
-                      >
-                        <option value="Beginner">Beginner (&lt; 1 Year)</option>
-                        <option value="Junior">Junior Developer (1-2 Years)</option>
-                        <option value="Mid">Mid-Level Developer (3-5 Years)</option>
-                        <option value="Senior">Senior Developer (5+ Years)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-[#64748B] text-xs font-mono tracking-wider uppercase">What is your learning goal? *</label>
-                    <textarea 
-                      required 
-                      rows={4} 
-                      placeholder="Tell us what stacks you want to master, or what guidance you need..." 
-                      className="w-full px-4 py-3 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10 text-[#0B132B] text-sm focus:border-[#00E5FF] outline-none transition-colors resize-vertical"
-                    />
-                  </div>
-                </>
-              )}
-
-              <button 
-                type="submit" 
-                disabled={isSubmitting} 
-                className="w-full flex items-center justify-center gap-2 px-5 py-4 mt-4 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-sm transition-all duration-200 cursor-pointer shadow-lg shadow-[#00E5FF]/15"
-              >
-                {isSubmitting ? 'Submitting Details...' : "Submit Inquiry"}
-              </button>
-            </form>
-          )}
-        </div>
-
-      </div>
-    </div>
-  )
-}
-
 /* ── How We Work Section ── */
 const HowWeWork = () => {
   const steps = [
@@ -1106,21 +680,6 @@ const HowWeWork = () => {
   )
 }
 
-/* ── WhatsApp Floating Action Button ── */
-const WhatsAppFAB = () => (
-  <a
-    href="https://wa.me/9183298985"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Contact us on WhatsApp"
-    className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg shadow-[#25d366]/30 z-40 transition-all duration-200 hover:scale-110 hover:shadow-[#25d366]/40"
-  >
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-    </svg>
-  </a>
-)
-
 /* ── Main Export Component ── */
 export default function HomePage() {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
@@ -1130,19 +689,18 @@ export default function HomePage() {
 
   return (
     <div className="bg-[#F4F5F7] min-h-screen text-[#0B132B] selection:bg-[#00E5FF]/30 selection:text-[#0B132B] font-sans antialiased">
-      <Nav onProjectClick={openProject} />
+      <Nav variant="business" onProjectClick={openProject} />
       <Hero onProjectClick={openProject} />
       <About />
       <TechStack />
       <HowWeWork />
       <Services />
-      <Learners />
       <CaseStudies />
       <Pricing onProjectClick={openProject} />
       <Testimonials />
       <CTA onProjectClick={openProject} />
-      <Footer />
-      {isProjectModalOpen && <ProjectModal onClose={closeProject} />}
+      <Footer variant="business" />
+      {isProjectModalOpen && <ProjectModal onClose={closeProject} defaultType="Business" />}
       <WhatsAppFAB />
     </div>
   )
