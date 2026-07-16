@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import {
   Code, Database, Server, Shield, Rocket, CheckCircle2,
-  Users, Bot, Building2, Wrench, Package, Target, Mail,
+  Users, Bot, Building2, Wrench, Package, Mail,
   ArrowRight, ArrowUpRight, Cpu, Network, Sparkles,
   Globe, Layers, Terminal, Zap, Star, Quote,
   Calendar
@@ -89,24 +89,6 @@ const About = () => (
           <p className="text-[#64748B] text-base md:text-lg leading-relaxed">
             At GetByTech, we work directly with founders and product teams to translate complex business ideas into robust, production-ready software systems. Our process is zero-overhead, highly collaborative, and laser-focused on rapid business value.
           </p>
-          
-          <div className="grid grid-cols-2 gap-4 pt-4">
-            {[
-              [Layers, 'System Architecture'],
-              [Server, 'Scalable Backend APIs'],
-              [Shield, 'OWASP Security Hardening'],
-              [Cpu, 'Performance Tuning'],
-              [Bot, 'AI Agent Automations'],
-              [Network, 'Cloud Architecture']
-            ].map(([Icon, label]) => (
-              <div key={label} className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-[#0B132B]/10 shadow-sm">
-                <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center flex-shrink-0">
-                  <Icon size={14} className="text-[#0B132B]" />
-                </div>
-                <span className="text-[#0B132B] text-sm font-semibold">{label}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Right Founder Column */}
@@ -146,24 +128,6 @@ const About = () => (
 
 /* ── Services Section ── */
 const Services = () => {
-  const areas = [
-    {
-      title: "AI-Powered Business Systems",
-      items: ["RAG chatbots & assistants", "AI analytics & insights", "Workflow automation pipelines"],
-      icon: Bot
-    },
-    {
-      title: "Startup & Enterprise Solutions",
-      items: ["Internal tools & portals", "Legacy system modernization", "Backend refactoring"],
-      icon: Building2
-    },
-    {
-      title: "Architecture",
-      items: ["Modular Monolith Design", "Domain-Driven Architectures", "Maintainable Codebases"],
-      icon: Layers
-    }
-  ]
-
   const businessServices = [
     {
       icon: Rocket,
@@ -177,7 +141,6 @@ const Services = () => {
       desc: "Fast-track your validation process. We build launch-ready, high-fidelity Minimum Viable Products in weeks so you can secure customers or raise funding.",
       tags: ["Rapid Prototyping", "Auth", "Payments", "SEO"]
     },
-   
     {
       icon: Globe,
       title: "Custom Web & App Solutions",
@@ -185,12 +148,17 @@ const Services = () => {
       tags: ["React Native", "Flutter", "Tailwind CSS"]
     },
     {
+      icon: Bot,
+      title: "AI-Powered Automation & Agents",
+      desc: "RAG chatbots, AI-driven analytics, and workflow automation pipelines that plug directly into your existing systems and cut manual busywork.",
+      tags: ["RAG", "LangChain", "Workflow Automation", "LLM APIs"]
+    },
+    {
       icon: Cpu,
       title: "Product Scaling Strategies",
       desc: "Tackle bottlenecks. We optimize database queries, implement caching structures, configure microservices, and reduce bloated cloud bills.",
       tags: ["Redis", "ClickHouse", "AWS Cost Optimization"]
     },
-    
   ]
 
   return (
@@ -227,40 +195,6 @@ const Services = () => {
                     </span>
                   ))}
                 </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Expertise Focus Sub-section */}
-        <div className="text-center max-w-2xl mx-auto mt-20 mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0B132B]/10 text-[#64748B] text-xs font-mono">
-            <Target size={12} className="text-[#00A8CC]" /> Expertise Focus
-          </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-            Specialized engineering for complex needs
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {areas.map((area, idx) => {
-            const Icon = area.icon
-            return (
-              <div key={idx} className="glass-panel p-8 rounded-2xl bg-white border border-[#0B132B]/10 flex flex-col h-full hover:scale-[1.02] transition-transform duration-300">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center">
-                    <Icon size={20} className="text-[#0B132B]" />
-                  </div>
-                  <h3 className="text-[#0B132B] text-lg font-bold leading-snug">{area.title}</h3>
-                </div>
-                <ul className="space-y-3 flex-grow list-none">
-                  {area.items.map((item, iIdx) => (
-                    <li key={iIdx} className="flex items-center gap-3 text-[#64748B] text-sm">
-                      <CheckCircle2 size={16} className="text-[#00E5FF] flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             )
           })}
@@ -381,7 +315,13 @@ const TechStack = () => {
     { icon: Code, title: "Frontend Frameworks", chips: ['React.js', 'Next.js', 'Tailwind CSS', 'Redux Toolkit'] },
     { icon: Server, title: "Backend Solutions", chips: ['Node.js', 'Express', 'Fastify', 'FastAPI', 'Laravel'] },
     { icon: Database, title: "Databases & Cache", chips: ['PostgreSQL', 'MongoDB', 'Redis Caching', 'Vector DB (pgvector)'] },
-    { icon: Network, title: "Systems Architecture", chips: ['Microservices', 'Event-Driven Systems', 'NATS', 'Kafka Message Broker'] },
+    { icon: Network, title: "Systems Architecture", chips: [
+    'Modular Monolith',
+    'Microservices',
+    'Event-Driven Systems',
+    'NATS',
+    'Kafka'
+  ] },
     { icon: Cpu, title: "Performance Scaling", chips: ['Horizontal Scaling', 'CDN Caching', 'DB Query Optimization', 'Load Balancing'] },
     { icon: Shield, title: "Security Protocols", chips: ['JWT / OAuth2', 'RBAC System', 'Rate Limiting', 'OWASP Standards'] }
   ]
