@@ -22,7 +22,7 @@ const Nav = ({ onProjectClick }) => {
         <ul className="hidden md:flex items-center gap-1 list-none">
           {[
             ['#services', 'Services'],
-            ['#hiring', 'Developer Hiring'],
+            ['#about', 'About Us'],
             ['#case-studies', 'Case Studies'],
             ['#learners', 'For Learners'],
             ['#pricing', 'Pricing']
@@ -59,12 +59,12 @@ const Nav = ({ onProjectClick }) => {
         <div className="fixed top-20 left-0 right-0 z-40 bg-[#F4F5F7]/95 backdrop-blur-2xl border-b border-[#0B132B]/10 p-6 flex flex-col gap-3 md:hidden animate-in fade-in slide-in-from-top-4 duration-200">
           {[
             ['#services', 'Services'],
-            ['#hiring', 'Developer Hiring'],
+            ['#about', 'About Us'],
             ['#case-studies', 'Case Studies'],
             ['#learners', 'For Learners'],
             ['#pricing', 'Pricing']
           ].map(([href, label]) => (
-            <a 
+            <a
               key={label} 
               href={href} 
               className="px-4 py-3 rounded-lg text-[#64748B] hover:text-[#0B132B] text-base font-medium transition-colors"
@@ -145,7 +145,7 @@ const Hero = ({ onProjectClick }) => (
 
 /* ── About & Founder Component ── */
 const About = () => (
-  <section className="py-24 bg-white/50 border-y border-[#0B132B]/10 relative">
+  <section id="about" className="py-24 bg-white/50 border-y border-[#0B132B]/10 relative scroll-mt-10">
     <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
@@ -299,56 +299,6 @@ const Services = () => {
     </section>
   )
 }
-
-/* ── Developer Hiring Dedicated Section ── */
-const DeveloperHiring = ({ onProjectClick }) => (
-  <section id="hiring" className="py-24 bg-white/50 border-t border-[#0B132B]/10 relative scroll-mt-10">
-    <div className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] rounded-full bg-[#00E5FF]/5 pointer-events-none blur-3xl" />
-    <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-      <div className="glass-panel p-8 md:p-12 rounded-3xl border border-[#00E5FF]/20 bg-[#00E5FF]/5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-8 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5FF]/15 border border-[#00E5FF]/30 text-[#0B132B] text-xs font-semibold">
-              <Users size={12} /> Scale Your Team
-            </div>
-            <h3 className="text-3xl md:text-4xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-              Hire Dedicated Senior Developers on Demand
-            </h3>
-            <p className="text-[#64748B] text-base md:text-lg leading-relaxed">
-              Skip recruiting delays and staffing agency premiums. Get top-tier senior software engineers who integrate directly with your product pipeline, collaborate daily, and deliver high-performance code immediately.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                "100% vetted senior-level code contributors",
-                "Full timezone alignment support",
-                "No overhead, simple monthly agreements",
-                "Direct developer communication via Slack/Teams"
-              ].map(bullet => (
-                <div key={bullet} className="flex items-center gap-2.5 text-[#0B132B] text-sm font-semibold">
-                  <CheckCircle2 size={16} className="text-[#00A8CC] flex-shrink-0" />
-                  {bullet}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-white rounded-2xl border border-[#0B132B]/10 shadow-sm">
-            <div className="text-center space-y-2 mb-6">
-              <div className="text-[#64748B] text-sm">Flexible Staffing</div>
-              <div className="text-[#0B132B] text-3xl font-extrabold">$4,500<span className="text-[#64748B] text-sm font-normal">/month</span></div>
-              <div className="text-[#64748B] text-xs">Full-time dedicated senior resource</div>
-            </div>
-            <button 
-              className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-sm transition-all duration-200 cursor-pointer shadow-lg shadow-[#00E5FF]/15"
-              onClick={onProjectClick}
-            >
-              <Mail size={14} /> Request Developer Profiles
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-)
 
 /* ── For Learners Section (Secondary / Credibility Builder) ── */
 const Learners = () => {
@@ -1201,13 +1151,12 @@ export default function HomePage() {
       <Nav onProjectClick={openProject} />
       <Hero onProjectClick={openProject} />
       <About />
+      <TechStack />
+      <HowWeWork />
       <FocusAreas />
       <Services />
-      <HowWeWork />
-      <DeveloperHiring onProjectClick={openProject} />
       <Learners />
       <CaseStudies />
-      <TechStack />
       <Pricing onProjectClick={openProject} />
       <Testimonials />
       <CTA onProjectClick={openProject} />
