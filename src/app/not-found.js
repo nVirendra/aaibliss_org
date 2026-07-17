@@ -21,9 +21,9 @@ export default function NotFound() {
         </p>
 
         <div className="pt-4">
-          <Link 
+          <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm"
+            className="btn btn-primary btn-md"
           >
             <ArrowLeft size={16} /> Back to Home
           </Link>

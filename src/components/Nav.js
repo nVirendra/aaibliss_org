@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Mail, Menu, X } from 'lucide-react'
 
 const NAV_LINKS = {
@@ -29,16 +30,27 @@ const CTA_LABEL = {
 /* ── Nav Component ── */
 const Nav = ({ variant = 'business', onProjectClick }) => {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const links = NAV_LINKS[variant]
   const crossLink = CROSS_LINK[variant]
   const ctaLabel = CTA_LABEL[variant]
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-20 bg-[#F4F5F7]/95 backdrop-blur-xl border-b border-[#0B132B]/10">
-        <a href="/" className="flex items-center">
+    <header>
+      <nav
+        aria-label="Primary"
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-20 bg-[#F4F5F7]/90 backdrop-blur-xl border-b transition-shadow duration-300 ${scrolled ? 'border-[#0B132B]/10 shadow-[0_1px_0_rgba(11,19,43,0.04),0_12px_28px_-16px_rgba(11,19,43,0.18)]' : 'border-transparent'}`}
+      >
+        <Link href="/" className="flex items-center">
           <img src="/light-bg.png" alt="GetByTech" className="h-8 w-auto" />
-        </a>
+        </Link>
 
         <ul className="hidden md:flex items-center gap-1 list-none">
           {links.map(([href, label]) => (
@@ -49,18 +61,18 @@ const Nav = ({ variant = 'business', onProjectClick }) => {
             </li>
           ))}
           <li>
-            <a
+            <Link
               href={crossLink.href}
               className="ml-2 px-4 py-2 rounded-lg text-[#64748B] hover:text-[#0B132B] text-sm font-medium border-l border-[#0B132B]/10 transition-colors duration-200"
             >
               {crossLink.label}
-            </a>
+            </Link>
           </li>
         </ul>
 
         <div className="flex items-center gap-4">
           <button
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-sm transition-all duration-200 shadow-md shadow-[#00E5FF]/10 active:scale-95 cursor-pointer animate-pulse"
+            className="btn btn-primary btn-md hidden md:inline-flex"
             onClick={onProjectClick}
           >
             <Mail size={14} /> {ctaLabel}
@@ -71,6 +83,8 @@ const Nav = ({ variant = 'business', onProjectClick }) => {
             className="md:hidden p-2 rounded-lg text-[#64748B] hover:text-[#0B132B] transition-colors cursor-pointer"
             id="hamburger"
             aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -79,7 +93,7 @@ const Nav = ({ variant = 'business', onProjectClick }) => {
 
       {/* --Mobile Drawer-- */}
       {open && (
-        <div className="fixed top-20 left-0 right-0 z-40 bg-[#F4F5F7]/95 backdrop-blur-2xl border-b border-[#0B132B]/10 p-6 flex flex-col gap-3 md:hidden animate-in fade-in slide-in-from-top-4 duration-200">
+        <div id="mobile-menu" className="fixed top-20 left-0 right-0 z-40 bg-[#F4F5F7]/95 backdrop-blur-2xl border-b border-[#0B132B]/10 shadow-lg p-6 flex flex-col gap-3 md:hidden animate-in fade-in slide-in-from-top-4 duration-200">
           {links.map(([href, label]) => (
             <a
               key={label}
@@ -90,22 +104,22 @@ const Nav = ({ variant = 'business', onProjectClick }) => {
               {label}
             </a>
           ))}
-          <a
+          <Link
             href={crossLink.href}
             className="px-4 py-3 rounded-lg text-[#64748B] hover:text-[#0B132B] text-base font-medium transition-colors border-t border-[#0B132B]/10 pt-4"
             onClick={() => setOpen(false)}
           >
             {crossLink.label}
-          </a>
+          </Link>
           <button
-            className="w-full flex items-center justify-center gap-2 px-5 py-3.5 mt-2 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-base transition-all duration-200"
+            className="btn btn-primary btn-lg w-full mt-2"
             onClick={() => { setOpen(false); onProjectClick(); }}
           >
             <Mail size={16} /> {ctaLabel}
           </button>
         </div>
       )}
-    </>
+    </header>
   )
 }
 

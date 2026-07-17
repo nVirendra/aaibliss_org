@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { X, CheckCircle2 } from 'lucide-react'
 
 /* ── Project Modal Component ── */
@@ -8,6 +8,12 @@ const ProjectModal = ({ onClose, defaultType = 'Business' }) => {
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [inquiryType, setInquiryType] = useState(defaultType) // 'Business' or 'Learner'
+
+  useEffect(() => {
+    const onKeyDown = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [onClose])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -19,8 +25,16 @@ const ProjectModal = ({ onClose, defaultType = 'Business' }) => {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0B132B]/40 backdrop-blur-md overflow-y-auto">
-      <div className="bg-white border border-[#0B132B]/15 rounded-3xl w-full max-w-2xl overflow-hidden relative shadow-2xl shadow-[#0B132B]/10 max-h-[90vh] flex flex-col">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0B132B]/40 backdrop-blur-md overflow-y-auto"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
+        className="bg-white border border-[#0B132B]/15 rounded-3xl w-full max-w-2xl overflow-hidden relative shadow-2xl shadow-[#0B132B]/10 max-h-[90vh] flex flex-col"
+      >
 
         {/* Close Button */}
         <button
@@ -33,7 +47,7 @@ const ProjectModal = ({ onClose, defaultType = 'Business' }) => {
 
         {/* Modal Header */}
         <div className="p-8 border-b border-[#0B132B]/10 flex-shrink-0 bg-[#F4F5F7]/50">
-          <h3 className="text-2xl md:text-3xl font-extrabold text-[#0B132B] tracking-tight">
+          <h3 id="project-modal-title" className="text-2xl md:text-3xl font-extrabold text-[#0B132B] tracking-tight">
             Start a <span className="text-[#00A8CC] italic">Conversation</span>
           </h3>
           <p className="text-[#64748B] text-sm mt-2">
@@ -74,7 +88,7 @@ const ProjectModal = ({ onClose, defaultType = 'Business' }) => {
               </p>
               <button
                 type="button"
-                className="px-6 py-2.5 rounded-xl bg-[#F4F5F7] hover:bg-[#slate-100] text-[#0B132B] border border-[#0B132B]/10 text-sm font-semibold transition-colors cursor-pointer"
+                className="btn btn-secondary btn-md"
                 onClick={onClose}
               >
                 Close Window
@@ -215,7 +229,7 @@ const ProjectModal = ({ onClose, defaultType = 'Business' }) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-5 py-4 mt-4 rounded-xl bg-[#00E5FF] hover:bg-[#00E5FF]/85 text-[#0B132B] font-semibold text-sm transition-all duration-200 cursor-pointer shadow-lg shadow-[#00E5FF]/15"
+                className="btn btn-primary btn-lg w-full mt-4 disabled:opacity-60 disabled:pointer-events-none"
               >
                 {isSubmitting ? 'Submitting Details...' : "Submit Inquiry"}
               </button>
