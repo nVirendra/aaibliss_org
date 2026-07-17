@@ -9,7 +9,7 @@ const COLUMNS = {
       links: [
         ['#services', 'Services'],
         ['#about', 'About Us'],
-        ['#case-studies', 'Case Studies'],
+        ['#projects', 'Projects'],
         ['#pricing', 'Pricing'],
       ],
     },

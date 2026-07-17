@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node shot2.js)"
+      "Bash(node shot2.js)",
+      "Skill(run)",
+      "Skill(run:*)"
     ]
   }
 }

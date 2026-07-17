@@ -1,19 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Code, Database, Server, Shield, Rocket, CheckCircle2,
   Users, Bot, Building2, Wrench, Package, Mail,
   ArrowRight, ArrowUpRight, Cpu, Network, Sparkles,
-  Globe, Layers, Terminal, Zap, Star, Quote,
+  Globe, Layers, Terminal, Zap,
   Calendar, Activity, GitBranch,
   Search, ClipboardList, PenTool, Bug, UploadCloud, LifeBuoy, ChevronDown
 } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ProjectModal from '@/components/ProjectModal'
+import ProjectDetailModal from '@/components/ProjectDetailModal'
+import VideoEmbed from '@/components/VideoEmbed'
 import WhatsAppFAB from '@/components/WhatsAppFAB'
 import Reveal from '@/components/Reveal'
+import { projects } from '@/data/projects'
 
 /* ── Hero Component ── */
 const Hero = ({ onProjectClick }) => (
@@ -265,111 +268,93 @@ const Services = () => {
   )
 }
 
-/* ── Case Studies Section ── */
-const CaseStudies = () => {
-  const projects = [
-    {
-      title: "PayDash: Fintech Payment Core",
-      tag: "SYSTEMS ENGINEERING",
-      desc: "Redesigned a high-traffic payment processing architecture to handle peak flash sale traffic without dropping transactions.",
-      img: "/portfolio_paydash.png",
-      metrics: [
-        { val: "38%", lbl: "Infrastructure Cost Cut" },
-        { val: "42ms", lbl: "Avg Latency (Down from 450ms)" }
-      ],
-      tech: ["Node.js", "Fastify", "Redis", "NATS", "PostgreSQL"],
-      demoUrl: "https://paydash-demo.GetByTech.com"
-    },
-    {
-      title: "Nexlify AI: Enterprise RAG Agent",
-      tag: "AI & AUTOMATION",
-      desc: "Developed a high-accuracy Retrieval-Augmented Generation agent querying over 40,000 internal training and technical docs.",
-      img: "/portfolio_nexlify.png",
-      metrics: [
-        { val: "3×", lbl: "Support Volume Handled" },
-        { val: "85%", lbl: "Auto Query Resolution" }
-      ],
-      tech: ["FastAPI", "pgvector", "Redis", "OpenAI", "LangChain"],
-      demoUrl: "https://nexlify-ai-demo.GetByTech.com"
-    },
-    {
-      title: "SaaSify: Real-Time B2B Analytics",
-      tag: "SAAS ARCHITECTURE",
-      desc: "Built a robust time-series analytical engine capable of parsing and visualizing 10 million events per day in real-time.",
-      img: "/portfolio_saasify.png",
-      metrics: [
-        { val: "10M+", lbl: "Events / Day Traversed" },
-        { val: "<200ms", lbl: "Dashboard Load Time" }
-      ],
-      tech: ["Next.js", "ClickHouse", "Go", "AWS Lambda", "Tailwind CSS"],
-      demoUrl: "https://saasify-demo.GetByTech.com"
-    }
-  ]
+/* ── Project Card: video, tagline, problem/features, tech badges, links ── */
+const ProjectCard = ({ project, index, onViewDetails }) => {
+  const reversed = index % 2 === 1
 
   return (
-    <section id="case-studies" className="py-24 bg-[#F4F5F7] border-t border-[#0B132B]/10 scroll-mt-24">
-      <div className="max-w-6xl mx-auto px-6 md:px-12">
-        <Reveal className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="space-y-4">
-            <div className="badge">
-              <Rocket size={12} /> Case Studies
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-              Production systems built for <br />
-              <span className="text-[#00A8CC] italic">speed, security, & scale.</span>
-            </h2>
-          </div>
-          <p className="text-[#64748B] text-base max-w-md">
-            Explore our real-world projects showing how robust backend architecture, product design, and clean execution deliver measurable business outcomes.
-          </p>
-        </Reveal>
+    <Reveal delay={index * 100} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+      <div className={`surface-card rounded-2xl overflow-hidden ${reversed ? 'lg:order-2' : ''}`}>
+        <VideoEmbed videoUrl={project.videoUrl} poster={project.poster} title={project.name} />
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((proj, idx) => (
-            <Reveal key={proj.title} delay={idx * 80} className="surface-card rounded-2xl overflow-hidden flex flex-col h-full group">
-              <div className="h-48 overflow-hidden bg-slate-100 border-b border-[#0B132B]/10 relative">
-                <img src={proj.img} alt={proj.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <div className="p-6 flex flex-col justify-between flex-grow">
-                <div className="space-y-4">
-                  <span className="text-[10px] font-mono tracking-wider text-[#0B132B] bg-[#00E5FF]/20 px-2.5 py-1 rounded font-bold uppercase">{proj.tag}</span>
-                  <h3 className="text-[#0B132B] text-xl font-bold leading-snug">{proj.title}</h3>
-                  <p className="text-[#64748B] text-sm leading-relaxed">{proj.desc}</p>
+      <div className={`space-y-5 ${reversed ? 'lg:order-1' : ''}`}>
+        <div className="space-y-2">
+          <span className="text-[10px] font-mono tracking-wider text-[#0B132B] bg-[#00E5FF]/20 px-2.5 py-1 rounded font-bold uppercase inline-block">
+            {project.category}
+          </span>
+          <h3 className="text-[#0B132B] text-2xl md:text-3xl font-bold leading-snug">{project.name}</h3>
+          <p className="text-[#00A8CC] text-sm md:text-base font-semibold">{project.tagline}</p>
+        </div>
 
-                  <div className="grid grid-cols-2 gap-4 p-4 rounded-xl bg-[#F4F5F7] border border-[#0B132B]/10">
-                    {proj.metrics.map((m, mIdx) => (
-                      <div key={mIdx} className="flex flex-col">
-                        <span className="text-[#0B132B] text-lg font-extrabold leading-tight">{m.val}</span>
-                        <span className="text-[#64748B] text-[10px] font-medium mt-0.5">{m.lbl}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+        <p className="text-[#64748B] text-sm md:text-base leading-relaxed">{project.problem}</p>
 
-                <div className="space-y-4 mt-6">
-                  <div className="flex flex-wrap gap-1.5">
-                    {proj.tech.map((t, tIdx) => (
-                      <span key={tIdx} className="px-2 py-0.5 rounded bg-[#F4F5F7] border border-[#0B132B]/10 text-[10px] font-mono text-[#64748B]">{t}</span>
-                    ))}
-                  </div>
-                  <a
-                    href={proj.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-secondary w-full text-xs py-2.5"
-                  >
-                    Explore Live Demo <ArrowUpRight size={13} className="text-[#00A8CC]" />
-                  </a>
-                </div>
-              </div>
-            </Reveal>
+        <ul className="space-y-2.5 list-none">
+          {project.features.map((feat) => (
+            <li key={feat} className="flex items-start gap-2.5 text-[#0B132B] text-sm leading-snug">
+              <CheckCircle2 size={15} className="text-[#00A8CC] mt-0.5 flex-shrink-0" />
+              <span>{feat}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {project.tech.map((t) => (
+            <span key={t} className="px-2.5 py-1 rounded-md bg-[#F4F5F7] border border-[#0B132B]/10 text-[#64748B] text-xs font-mono">
+              {t}
+            </span>
           ))}
         </div>
+
+        <div className="flex flex-wrap gap-3 pt-2">
+          {project.links?.live && (
+            <a
+              href={project.links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary btn-md"
+            >
+              Live Demo <ArrowUpRight size={14} className="text-[#00A8CC]" />
+            </a>
+          )}
+          {project.links?.details && (
+            <button onClick={() => onViewDetails(project)} className="btn btn-primary btn-md">
+              View Details
+            </button>
+          )}
+        </div>
       </div>
-    </section>
+    </Reveal>
   )
 }
+
+/* ── Projects Section ── */
+const Projects = ({ onViewDetails }) => (
+  <section id="projects" className="py-24 bg-[#F4F5F7] border-t border-[#0B132B]/10 scroll-mt-24">
+    <div className="max-w-6xl mx-auto px-6 md:px-12">
+      <Reveal className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="space-y-4">
+          <div className="badge">
+            <Rocket size={12} /> Projects
+          </div>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
+            Products we've built, <br />
+            <span className="text-[#00A8CC] italic">not just pitched.</span>
+          </h2>
+        </div>
+        <p className="text-[#64748B] text-base max-w-md">
+          A look at software we've designed and shipped ourselves — the same engineering rigor and craft you'd get on your product. Watch the demo for each one below.
+        </p>
+      </Reveal>
+
+      <div className="space-y-20 md:space-y-28">
+        {projects.map((project, idx) => (
+          <ProjectCard key={project.id} project={project} index={idx} onViewDetails={onViewDetails} />
+        ))}
+      </div>
+    </div>
+  </section>
+)
 
 /* ── Tech Stack Component ── */
 const TechStack = () => {
@@ -428,15 +413,37 @@ const TechStack = () => {
   )
 }
 
+/* ── Detects an Indian visitor from timezone/locale — no external geo-IP call.
+     Defaults to international (USD) until the client-side check resolves. ── */
+const detectIsIndia = () => {
+  if (typeof window === 'undefined') return false
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+    if (tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta') return true
+  } catch {
+    // Intl unsupported — fall through to locale check
+  }
+  const langs = navigator.languages || [navigator.language]
+  return langs.some((l) => l?.toUpperCase().endsWith('-IN'))
+}
+
 /* ── Engagement Models (Pricing) ── */
 const Pricing = ({ onProjectClick }) => {
+  const [isIndia, setIsIndia] = useState(false)
+
+  useEffect(() => {
+    setIsIndia(detectIsIndia())
+  }, [])
+
+  const region = isIndia ? 'in' : 'intl'
+
   const models = [
     {
       title: "Project-Based",
       badge: "Fixed Scope",
       desc: "Perfect for building defined MVPs, custom software integrations, or standalone system migrations.",
-      cost: "Custom Scope",
-      period: "per project",
+      cost: { in: 'Starting ₹1,50,000', intl: 'Custom Scope' },
+      period: { in: 'per project', intl: 'per project' },
       features: [
         "Complete architecture blueprinting",
         "Rigorous scope & timeline mapping",
@@ -450,8 +457,8 @@ const Pricing = ({ onProjectClick }) => {
       title: "Monthly Retainer",
       badge: "Dedicated Developer",
       desc: "Perfect for scaling startups needing ongoing feature development, cloud scaling, or fractional CTO support.",
-      cost: "$4,500",
-      period: "/ month",
+      cost: { in: '₹1,50,000', intl: '$4,500' },
+      period: { in: '/ month', intl: '/ month' },
       popular: true,
       features: [
         "Dedicated senior software engineer",
@@ -465,8 +472,8 @@ const Pricing = ({ onProjectClick }) => {
       title: "Consulting Call",
       badge: "1:1 Advisory",
       desc: "Perfect for engineering audits, backend design advice, database debugging, or system scaling reviews.",
-      cost: "$250",
-      period: "/ hour",
+      cost: { in: '₹5,000', intl: '$250' },
+      period: { in: '/ hour', intl: '/ hour' },
       features: [
         "Focused 60-minute video session",
         "Pre-call codebase/brief review",
@@ -491,6 +498,9 @@ const Pricing = ({ onProjectClick }) => {
           <p className="text-[#64748B] text-base">
             Transparent engagement structures designed for clarity, alignment of goals, and high developer efficiency.
           </p>
+          <p className="text-[#64748B]/70 text-xs font-mono">
+            {isIndia ? 'Pricing shown in INR for India — reach out for other currencies.' : 'Pricing shown in USD — INR pricing available for clients in India.'}
+          </p>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
@@ -513,8 +523,8 @@ const Pricing = ({ onProjectClick }) => {
                 </div>
                 <p className="text-[#64748B] text-sm leading-relaxed">{model.desc}</p>
                 <div className="flex items-baseline gap-1 text-[#0B132B]">
-                  <span className="text-3xl md:text-4xl font-extrabold">{model.cost}</span>
-                  <span className="text-[#64748B] text-xs">{model.period}</span>
+                  <span className="text-3xl md:text-4xl font-extrabold">{model.cost[region]}</span>
+                  <span className="text-[#64748B] text-xs">{model.period[region]}</span>
                 </div>
 
                 <ul className="space-y-3 pt-6 border-t border-[#0B132B]/10 list-none">
@@ -543,53 +553,61 @@ const Pricing = ({ onProjectClick }) => {
   )
 }
 
-/* ── Testimonials Component ── */
-const Testimonials = () => {
-  const list = [
+/* ── Why Work With Us Component ── */
+const WhyWorkWithUs = () => {
+  const points = [
     {
-      quote: "We were hemorrhaging money on over-provisioned infrastructure. GetByTech analyzed our queries, introduced caching layers, and simplified our data models. Our AWS bill dropped by 38% immediately. Outstanding technical capability.",
-      author: "Rohan Kapoor",
-      role: "CTO, PayDash (Fintech SaaS)",
-      initials: "RK"
+      icon: Users,
+      title: "Direct access to the engineer building your product",
+      desc: "No account managers, no hand-offs. You work directly with the person writing and reviewing the code."
     },
     {
-      quote: "GetByTech built our internal RAG assistant in less than a month. It queries over 40,000 documentation nodes and answers core product support queries with high accuracy. Our customer team now scales easily.",
-      author: "Arjun Pillai",
-      role: "VP Product, Nexlify (B2B Enterprise)",
-      initials: "AP"
+      icon: Rocket,
+      title: "Built the same way we build our own products",
+      desc: "Every project on this page was designed, shipped, and hardened using the exact process we bring to client work."
+    },
+    {
+      icon: Shield,
+      title: "Production-grade from day one",
+      desc: "Security, monitoring, and scalability are part of the initial build, not an afterthought bolted on later."
+    },
+    {
+      icon: Globe,
+      title: "Global-timezone availability",
+      desc: "Async-friendly communication with overlapping working hours across US and Indian timezones."
     }
   ]
 
   return (
     <section className="py-24 bg-[#F4F5F7] border-t border-[#0B132B]/10">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
-        <Reveal className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="space-y-4">
-            <div className="badge">
-              <Star size={12} /> Testimonials
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
-              Trusted by tech founders who prioritize <span className="text-[#00A8CC] italic">execution.</span>
-            </h2>
+        <Reveal className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+          <div className="badge">
+            <Users size={12} /> Why Work With Us
           </div>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
+            We're a new studio — <span className="text-[#00A8CC] italic">here's what that means for you.</span>
+          </h2>
+          <p className="text-[#64748B] text-base md:text-lg">
+            No inflated client roster, no recycled testimonials. Just the engineering standards we hold ourselves to on every product we ship.
+          </p>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {list.map((t, i) => (
-            <Reveal key={t.author} delay={i * 100} className="surface-card p-8 flex flex-col justify-between relative">
-              <Quote size={28} className="text-[#00E5FF]/20 absolute top-6 right-6 fill-[#00E5FF]/5" />
-              <p className="text-[#0B132B] text-base leading-relaxed mb-6 italic">"{t.quote}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00A8CC] to-[#0B132B] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                  {t.initials}
+          {points.map((p, i) => {
+            const Icon = p.icon
+            return (
+              <Reveal key={p.title} delay={i * 100} className="surface-card p-8 flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center flex-shrink-0">
+                  <Icon size={20} className="text-[#0B132B]" />
                 </div>
                 <div>
-                  <div className="text-[#0B132B] text-base font-bold">{t.author}</div>
-                  <div className="text-[#64748B] text-xs font-mono mt-0.5">{t.role}</div>
+                  <h3 className="text-[#0B132B] text-base font-bold mb-1.5 leading-snug">{p.title}</h3>
+                  <p className="text-[#64748B] text-sm leading-relaxed">{p.desc}</p>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -772,9 +790,18 @@ const HowWeWork = () => {
 /* ── Main Export Component ── */
 export default function HomePage() {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
+  const [selectedProject, setSelectedProject] = useState(null)
 
   const openProject = () => setIsProjectModalOpen(true)
   const closeProject = () => setIsProjectModalOpen(false)
+
+  const openProjectDetails = (project) => setSelectedProject(project)
+  const closeProjectDetails = () => setSelectedProject(null)
+
+  const startSimilarProject = () => {
+    closeProjectDetails()
+    openProject()
+  }
 
   return (
     <div className="bg-[#F4F5F7] min-h-screen text-[#0B132B] selection:bg-[#00E5FF]/30 selection:text-[#0B132B] font-sans antialiased">
@@ -785,13 +812,20 @@ export default function HomePage() {
         <TechStack />
         <HowWeWork />
         <Services />
-        <CaseStudies />
+        <Projects onViewDetails={openProjectDetails} />
         <Pricing onProjectClick={openProject} />
-        <Testimonials />
+        <WhyWorkWithUs />
         <CTA onProjectClick={openProject} />
       </main>
       <Footer variant="business" />
       {isProjectModalOpen && <ProjectModal onClose={closeProject} defaultType="Business" />}
+      {selectedProject && (
+        <ProjectDetailModal
+          project={selectedProject}
+          onClose={closeProjectDetails}
+          onStartProject={startSimilarProject}
+        />
+      )}
       <WhatsAppFAB />
     </div>
   )
